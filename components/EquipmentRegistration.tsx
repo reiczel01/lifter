@@ -52,35 +52,69 @@ export default function EquipmentRegistration() {
             label='Udzwig w kg'
             className='mt-4'
           />
-          <Input isRequired type='password' label='Hasło' className='mt-4' />
+          <Input isRequired type='text' label='Model' className='mt-4' />
+          <Input isRequired type='number' label='Rok budowy' className='mt-4' />
         </div>
         <div className='items-center md:mr-8'>
           <Input
             isRequired
-            type='text'
-            label='Numer uprawnień'
-            className='mt-4'
-          />
-          <Input
-            isRequired
-            type='number'
-            label='Numer PESEL'
-            className='mt-4'
-          />
-          <Input
-            isRequired
             type='date'
-            label='Data warzności uprawnień'
+            label='Data warzności decyzji'
             className='mt-4'
           />
           <div className='mt-4'>
             <label className='block text-sm font-medium text-gray-700'>
-              Upload uprawnień PDF:
+              Protokół wykonania czynności dozoru technicznego:
             </label>
             <input
               type='file'
               accept='application/pdf'
-              className='mt-4 block w-full text-sm
+              className='mt-1 block w-full text-sm
+                         text-slate-500 file:mr-4 file:rounded-full
+                         file:border-0 file:bg-violet-50
+                         file:px-4 file:py-2
+                         file:text-sm file:font-semibold
+                         file:text-blue-700 hover:file:bg-blue-100'
+            />
+          </div>
+          <div className='mt-4'>
+            <label className='block text-sm font-medium text-gray-700'>
+              Decyzja:
+            </label>
+            <input
+              type='file'
+              accept='application/pdf'
+              className='mt-1 block w-full text-sm
+                         text-slate-500 file:mr-4 file:rounded-full
+                         file:border-0 file:bg-violet-50
+                         file:px-4 file:py-2
+                         file:text-sm file:font-semibold
+                         file:text-blue-700 hover:file:bg-blue-100'
+            />
+          </div>
+          <div className='mt-4'>
+            <label className='block text-sm font-medium text-gray-700'>
+              Instrukcja obsługi:
+            </label>
+            <input
+              type='file'
+              accept='application/pdf'
+              className='mt-1 block w-full text-sm
+                         text-slate-500 file:mr-4 file:rounded-full
+                         file:border-0 file:bg-violet-50
+                         file:px-4 file:py-2
+                         file:text-sm file:font-semibold
+                         file:text-blue-700 hover:file:bg-blue-100'
+            />
+          </div>
+          <div className='mt-4'>
+            <label className='block text-sm font-medium text-gray-700'>
+              Schematy urządzenia:
+            </label>
+            <input
+              type='file'
+              accept='application/pdf'
+              className='mt-1 block w-full text-sm
                          text-slate-500 file:mr-4 file:rounded-full
                          file:border-0 file:bg-violet-50
                          file:px-4 file:py-2
@@ -133,12 +167,12 @@ export default function EquipmentRegistration() {
         <Link
           isExternal
           showAnchorIcon
-          href='https://github.com/nextui-org/nextui'
+          href='https://www.udt.gov.pl/rejestracja-urzadzenia'
         >
-          Zaloguj się.
+          Wymagania UDT
         </Link>
         <Button color='primary' size='md' className=' text-sm md:w-1/5'>
-          Zarejestruj się
+          Zarejestruj
           <ArrowRightIcon />
         </Button>
       </CardFooter>
