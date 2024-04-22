@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
+
 import {
   Button,
   Card,
@@ -16,6 +18,13 @@ import {
 import { ArrowRightIcon } from '@nextui-org/shared-icons';
 
 export default function EquipmentRegistration() {
+  type PermissionValue = '3' | '2' | '1' | '20' | '10';
+  const [permissions, setPermissions] = useState<PermissionValue[]>([]);
+  const handleCheckboxChange = (value: PermissionValue) => {
+    // Dodawanie nowej wartości do stanu permissions
+    setPermissions((prevPermissions) => [...prevPermissions, value]);
+  };
+  console.log(permissions);
   return (
     <Card className='max-w-3xl items-center'>
       <CardHeader className='flex w-full flex-col items-center gap-4 md:flex-row'>
@@ -151,7 +160,10 @@ export default function EquipmentRegistration() {
           }
         >
           <div className='mt-4 md:mt-0'>
-            <CheckboxGroup label='Uprawnienia:'>
+            <CheckboxGroup
+              label='Uprawnienia:'
+              onChange={(value) => handleCheckboxChange(value)}
+            >
               <Checkbox value='3'>I WJO</Checkbox>
               <Checkbox value='2'>II WJO</Checkbox>
               <Checkbox value='1'>III WJO</Checkbox>

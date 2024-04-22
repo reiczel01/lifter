@@ -25,7 +25,25 @@ model Equipment {
   decisionFilePath   String?
   manualFilePath     String?
   deviceSchematics   String?
+  image              String
+  type               Type[]
   permissions        Permission[]
+  fault              Fault[]
+}
+
+model Type {
+  id          Int         @id @default(autoincrement())
+  label       String
+  value       String
+  description String
+  equipment   Equipment[]
+}
+
+model Fault {
+  id          Int         @id @default(autoincrement())
+  present     Boolean
+  description String?
+  equipment   Equipment[]
 }
 
 model Permission {

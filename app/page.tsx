@@ -13,96 +13,9 @@ export default async function Home() {
 
   return (
     <main className='flex flex-col items-center'>
-      <div className='m-5 grid grid-cols-1 gap-5 md:grid-cols-4'>
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='ECJ112'
-          evidenceId='9714003683'
-          isDisabled={false}
-          maxLoad={1400}
-        />
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='M3'
-          evidenceId='12334523'
-          isDisabled={true}
-          maxLoad={1200}
-          issueDescription='Wystąpiła awaria wózka widłowego - nie podnosi ładunku. No i nie działa poprostu co mam zrobic'
-        />
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='ECJ112'
-          evidenceId='9714003683'
-          isDisabled={false}
-          maxLoad={1400}
-        />
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='ECJ112'
-          evidenceId='9714003683'
-          isDisabled={false}
-          maxLoad={1400}
-        />
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='M3'
-          evidenceId='12334523'
-          isDisabled={true}
-          maxLoad={1200}
-          issueDescription='Wystąpiła awaria wózka widłowego - nie podnosi ładunku. No i nie działa poprostu co mam zrobic'
-        />
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='ECJ112'
-          evidenceId='9714003683'
-          isDisabled={false}
-          maxLoad={1400}
-        />
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='ECJ112'
-          evidenceId='9714003683'
-          isDisabled={false}
-          maxLoad={1400}
-        />
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='M3'
-          evidenceId='12334523'
-          isDisabled={true}
-          maxLoad={1200}
-          issueDescription='Wystąpiła awaria wózka widłowego - nie podnosi ładunku. No i nie działa poprostu co mam zrobic'
-        />
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='ECJ112'
-          evidenceId='9714003683'
-          isDisabled={false}
-          maxLoad={1400}
-        />
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='ECJ112'
-          evidenceId='9714003683'
-          isDisabled={false}
-          maxLoad={1400}
-        />
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='M3'
-          evidenceId='12334523'
-          isDisabled={true}
-          maxLoad={1200}
-          issueDescription='Wystąpiła awaria wózka widłowego - nie podnosi ładunku. No i nie działa poprostu co mam zrobic'
-        />
-        <EquipmentCard
-          image='https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTA4MS1sMWRidDZxMy5qcGc.jpg'
-          model='ECJ112'
-          evidenceId='9714003683'
-          isDisabled={false}
-          maxLoad={1400}
-        />
-      </div>
+      <LogIn />
+      <Register />
+      <EquipmentRegistration />
     </main>
   );
 }

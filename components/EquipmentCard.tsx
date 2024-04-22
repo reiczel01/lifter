@@ -41,9 +41,10 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
         <Image
           shadow='sm'
           radius='lg'
+          height='200px'
           width='100%'
           alt={`Equipment image of ${model}`}
-          className='aspect-w-3 aspect-h-3 object-cover'
+          className='aspect-w-3 aspect-h-3 bg-white object-cover'
           src={image}
         />
       </CardBody>
