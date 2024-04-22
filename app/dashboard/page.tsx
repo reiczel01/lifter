@@ -14,9 +14,7 @@ export default async function Dashboard() {
       },
     },
   });
-  console.log(
-    allEquipment.map((equipment) => equipment.fault.map((fault) => fault.id)),
-  );
+
   return (
     <>
       <div className='ml-5 mt-4 items-start'>

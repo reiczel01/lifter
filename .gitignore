@@ -3,6 +3,8 @@
 # dependencies
 /node_modules
 /docker/db
+/docker/db/*
+/docker
 /.pnp
 .pnp.js
 .yarn/install-state.gz
