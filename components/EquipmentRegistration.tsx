@@ -160,10 +160,7 @@ export default function EquipmentRegistration() {
           }
         >
           <div className='mt-4 md:mt-0'>
-            <CheckboxGroup
-              label='Uprawnienia:'
-              onChange={(value) => handleCheckboxChange(value)}
-            >
+            <CheckboxGroup label='Uprawnienia:'>
               <Checkbox value='3'>I WJO</Checkbox>
               <Checkbox value='2'>II WJO</Checkbox>
               <Checkbox value='1'>III WJO</Checkbox>

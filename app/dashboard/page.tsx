@@ -4,6 +4,8 @@ import { Input } from '@nextui-org/react';
 import { SearchIcon } from '@nextui-org/shared-icons';
 import { PrismaClient } from '@prisma/client';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Dashboard() {
   const prisma = new PrismaClient();
   const allEquipment = await prisma.equipment.findMany({
@@ -21,7 +23,7 @@ export default async function Dashboard() {
         <div className='grid grid-cols-1 gap-5 md:grid-cols-4'>
           <div className='flex flex-col'>
             <Input
-              label='Search'
+              label='Wyszukiwarka'
               isClearable
               radius='sm'
               classNames={{
@@ -45,7 +47,7 @@ export default async function Dashboard() {
                   '!cursor-text',
                 ],
               }}
-              placeholder='Type to search...'
+              placeholder='Wpisz numer ewidencyjny...'
               startContent={
                 <SearchIcon className='pointer-events-none mb-0.5 flex-shrink-0 text-black/50 text-slate-400 dark:text-white/90' />
               }
@@ -58,6 +60,7 @@ export default async function Dashboard() {
         {allEquipment.map((equipment) => (
           <EquipmentCard
             key={equipment.id}
+            id={equipment.id}
             image={equipment.image || '/Logo.svg'}
             model={equipment.model}
             evidenceId={equipment.registrationNumber}

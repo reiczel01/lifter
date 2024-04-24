@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import Logo from '../public/Logo.svg';
 import {
   Navbar,
   NavbarBrand,
@@ -13,23 +12,12 @@ import {
   Button,
   Image,
 } from '@nextui-org/react';
+import { usePathname } from 'next/navigation';
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const menuItems = [
-    'Profile',
-    'Dashboard',
-    'Activity',
-    'Analytics',
-    'System',
-    'Deployments',
-    'My Settings',
-    'Team Settings',
-    'Help & Feedback',
-    'Log Out',
-  ];
-
+  const router = usePathname();
+  const isActive = (href: string) => router === href;
   return (
     <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent className='sm:hidden' justify='start'>
@@ -56,15 +44,17 @@ export default function NavBar() {
           <p>|</p>
           <p className='font-bold text-inherit'>&ensp;LIFTER</p>
         </NavbarBrand>
-        <NavbarItem>
-          <Link color='foreground' href='#'>
-            Features
+        <NavbarItem isActive={isActive('/dashboard' ? 'true' : 'false')}>
+          <Link
+            color='foreground'
+            className={isActive('/dashboard') ? 'font-bold text-blue-700' : ''}
+            href='/dashboard'
+          >
+            Tablica
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link href='#' aria-current='page'>
-            Customers
-          </Link>
+        <NavbarItem>
+          <Link href='#'>Customers</Link>
         </NavbarItem>
         <NavbarItem>
           <Link color='foreground' href='#'>
@@ -79,30 +69,22 @@ export default function NavBar() {
         </NavbarItem>
         <NavbarItem>
           <Button as={Link} color='warning' href='#' variant='flat'>
-            Sign Up
+            Rejestracja wózka
           </Button>
         </NavbarItem>
       </NavbarContent>
 
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className='w-full'
-              color={
-                index === 2
-                  ? 'warning'
-                  : index === menuItems.length - 1
-                    ? 'danger'
-                    : 'foreground'
-              }
-              href='#'
-              size='lg'
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+        <NavbarMenuItem>
+          <Link
+            className='w-full'
+            color={'foreground'}
+            href='/dashboard'
+            size='lg'
+          >
+            Tablica
+          </Link>
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );
