@@ -2,13 +2,12 @@ import React from 'react';
 import EquipmentCard from '@/components/EquipmentCard';
 import { Input } from '@nextui-org/react';
 import { SearchIcon } from '@nextui-org/shared-icons';
-import { PrismaClient } from '@prisma/client';
+import { db } from '@/db';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Dashboard() {
-  const prisma = new PrismaClient();
-  const allEquipment = await prisma.equipment.findMany({
+  const allEquipment = await db.equipment.findMany({
     include: {
       fault: {
         orderBy: { id: 'desc' },

@@ -42,7 +42,10 @@ model Type {
 model Fault {
   id          Int         @id @default(autoincrement())
   present     Boolean
+  title       String
   description String?
+  solution    String?
+  createdAt   DateTime    @default(now())
   equipment   Equipment[]
 }
 

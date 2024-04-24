@@ -1,11 +1,21 @@
 import { notFound } from 'next/navigation';
 import { db } from '@/db';
-import { Divider } from '@nextui-org/react';
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+  Tooltip,
+} from '@nextui-org/react';
 import Barcode from '@/components/barcode';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { pl } from 'date-fns/locale';
 import React from 'react';
 import ModalSizable from '@/components/ModalSizable';
+import FaultCard from '@/components/FaultCard';
+import { DateTimeFormat } from '@formatjs/ecma402-abstract';
+import { CalendarDateTime } from '@internationalized/date';
 
 interface EquipmentPageProps {
   params: {
@@ -18,6 +28,21 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
     where: {
       id: parseInt(props.params.id),
     },
+    include: {
+      fault: {
+        orderBy: { id: 'desc' },
+        select: {
+          id: true,
+          present: true,
+          title: true,
+          createdAt: true,
+          description: true,
+          solution: true,
+        },
+      },
+      permissions: true,
+      type: true,
+    },
   });
 
   if (!equipment) {
@@ -29,10 +54,26 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
     return format(date, 'dd MMMM yyyy', { locale: pl });
   }
 
+  function formatDateTime(dateString: any) {
+    const date = new Date(dateString);
+    return format(date, 'dd MMMM yyyy, HH:mm:ss', { locale: pl });
+  }
+
+  const faulty = equipment.fault[0].present;
+
   return (
-    <main className='my-4 flex flex-col px-4 sm:px-6 lg:px-8'>
-      <div className='flex flex-col gap-4 lg:flex-row'>
+    <main className={`my-4 flex flex-col px-4 sm:px-6 lg:px-8`}>
+      <div className={`flex flex-col gap-4 lg:flex-row `}>
         <div className='flex-1 rounded-lg bg-white p-4 shadow lg:w-1/3 lg:flex-none'>
+          <div className={`mb-4 mt-2 ${faulty ? '' : 'hidden'}`}>
+            <Card>
+              <CardHeader className='flex animate-pulse justify-center gap-3 bg-red-600'>
+                <h1 className='text-3xl font-bold uppercase text-white'>
+                  UWAGA: usterka sprzętu
+                </h1>
+              </CardHeader>
+            </Card>
+          </div>
           <div className='m-2'>
             <p className='font-bold uppercase'>model:</p>
             <a className='text-xl'> {equipment.model} </a>
@@ -110,6 +151,22 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
             title='PDF'
           />
         </div>
+      </div>
+      <div className={`mt-4 flex flex-col gap-4 lg:flex-row`}>
+        <div className='flex-1 rounded-lg bg-white p-4 shadow lg:w-1/2 lg:flex-none'>
+          {equipment.fault.map((fault) => (
+            <FaultCard
+              key={fault.id}
+              present={fault.present}
+              title={fault.title}
+              description={fault.description}
+              solution={fault.solution}
+              createdAt={formatDateTime(fault.createdAt)}
+              className='mb-4'
+            />
+          ))}
+        </div>
+        <div className='flex-1 rounded-lg bg-white p-4 shadow lg:w-1/2 lg:flex-none'></div>
       </div>
     </main>
   );
