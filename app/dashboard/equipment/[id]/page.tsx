@@ -14,8 +14,15 @@ import { pl } from 'date-fns/locale';
 import React from 'react';
 import ModalSizable from '@/components/ModalSizable';
 import FaultCard from '@/components/FaultCard';
-import { DateTimeFormat } from '@formatjs/ecma402-abstract';
-import { CalendarDateTime } from '@internationalized/date';
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@nextui-org/react';
+import TabelOfUsage from '@/components/TabelOfUsage';
 
 interface EquipmentPageProps {
   params: {
@@ -58,8 +65,8 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
     const date = new Date(dateString);
     return format(date, 'dd MMMM yyyy, HH:mm:ss', { locale: pl });
   }
-
-  const faulty = equipment.fault[0].present;
+  const faulty =
+    equipment.fault && equipment.fault[0] ? equipment.fault[0].present : false;
 
   return (
     <main className={`my-4 flex flex-col px-4 sm:px-6 lg:px-8`}>
@@ -154,19 +161,29 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
       </div>
       <div className={`mt-4 flex flex-col gap-4 lg:flex-row`}>
         <div className='flex-1 rounded-lg bg-white p-4 shadow lg:w-1/2 lg:flex-none'>
-          {equipment.fault.map((fault) => (
-            <FaultCard
-              key={fault.id}
-              present={fault.present}
-              title={fault.title}
-              description={fault.description}
-              solution={fault.solution}
-              createdAt={formatDateTime(fault.createdAt)}
-              className='mb-4'
-            />
-          ))}
+          <h1 className='mb-3 mt-1 text-xl font-bold'>
+            Historia urzytkowania:
+          </h1>
+          <div className='h-96 overflow-scroll bg-transparent p-1'>
+            <TabelOfUsage />
+          </div>
         </div>
-        <div className='flex-1 rounded-lg bg-white p-4 shadow lg:w-1/2 lg:flex-none'></div>
+        <div className=' flex-1  rounded-lg bg-white p-4 shadow lg:w-1/2 lg:flex-none'>
+          <h1 className='mb-3 mt-1 text-xl font-bold'>Historia usterek:</h1>
+          <div className='h-96 overflow-scroll bg-transparent p-1'>
+            {equipment.fault.map((fault) => (
+              <FaultCard
+                key={fault.id}
+                present={fault.present}
+                title={fault.title}
+                description={fault.description}
+                solution={fault.solution}
+                createdAt={formatDateTime(fault.createdAt)}
+                className='mb-4 '
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </main>
   );

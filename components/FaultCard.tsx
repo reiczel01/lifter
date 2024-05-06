@@ -37,7 +37,7 @@ export default function FaultCard({
         </span>
       </CardBody>
       <CardFooter className='gap-2'>
-        {present ? (
+        {present && (
           <Card className='w-full'>
             <CardHeader className='flex justify-center gap-2 bg-red-600'>
               <h1 className='text-medium font-bold uppercase text-white'>
@@ -45,11 +45,21 @@ export default function FaultCard({
               </h1>
             </CardHeader>
           </Card>
-        ) : (
+        )}
+        {!present && solution && (
           <Card className='w-full'>
             <CardHeader className='flex justify-center gap-2 bg-green-600'>
               <h1 className='text-medium font-bold uppercase text-white'>
                 usterka została usunięta
+              </h1>
+            </CardHeader>
+          </Card>
+        )}
+        {!present && !solution && (
+          <Card className='w-full'>
+            <CardHeader className='flex justify-center gap-2 bg-yellow-400'>
+              <h1 className='text-medium font-bold uppercase text-white'>
+                usterka występuje, nie zagraża bezpieczeństwu
               </h1>
             </CardHeader>
           </Card>
