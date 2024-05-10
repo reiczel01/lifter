@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6842891-5e4d-4e8a-bcdb-54b7728620dc" name="Changes" comment="Equipment site rought preMake">
-      <change afterPath="$PROJECT_DIR$/app/dashboard/tasks/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/dashboard/tasks/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_04_2024__18_26__Changes_1.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/registerEquipment/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/registerEquipment/submit.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dashboard/tasks/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/tasks/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,9 +62,9 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.Next.js.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "/Users/mateuszreczulski/Documents/Programowanie/lifter/node_modules/prettier",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Mateusz\\Desktop\\lifter\\node_modules\\prettier",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/mateuszreczulski/Documents/Programowanie/lifter/node_modules/typescript/lib",
+    "ts.external.directory.path": "C:\\Users\\Mateusz\\Desktop\\lifter\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>

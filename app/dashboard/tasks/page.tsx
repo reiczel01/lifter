@@ -40,15 +40,15 @@ export default function Tasks() {
         </div>
         <div className='flex flex-row flex-wrap gap-10 uppercase text-blue-50'>
           <div className='m-4 rounded-xl bg-green-600 px-4 py-3'>
-            <a>Wszystkie zadania: </a>
+            <a>Wszystkie: </a>
             <a>78945421</a>
           </div>
           <div className='m-4 rounded-xl bg-yellow-400 px-4 py-3'>
-            <a>Rozpoczęte zadania: </a>
+            <a>Rozpoczęte: </a>
             <a>78945421</a>
           </div>
           <div className='m-4 rounded-xl bg-red-600 px-4 py-3'>
-            <a>Zakończone zadania: </a>
+            <a>Zakończone: </a>
             <a>78945421</a>
           </div>
         </div>
