@@ -21,10 +21,10 @@ model Equipment {
   model              String
   constructionYear   Int
   validityDate       DateTime
-  protocolFilePath   String?
-  decisionFilePath   String?
-  manualFilePath     String?
-  deviceSchematics   String?
+  protocolFilePath   String
+  decisionFilePath   String
+  manualFilePath     String
+  deviceSchematics   String
   image              String
   type               Type[]
   permissions        Permission[]

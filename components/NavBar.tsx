@@ -68,7 +68,12 @@ export default function NavBar() {
           <Link href='#'>Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color='warning' href='#' variant='flat'>
+          <Button
+            as={Link}
+            color='warning'
+            href='/dashboard/registerEquipment'
+            variant='flat'
+          >
             Rejestracja wózka
           </Button>
         </NavbarItem>

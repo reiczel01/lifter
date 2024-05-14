@@ -122,7 +122,7 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
             <ModalSizable title={'Instrukcja obsługi'} size={'full'}>
               <iframe
                 className='h-full w-full'
-                src='/udt_test.pdf'
+                src={equipment.manualFilePath || '/404'}
                 title='PDF'
               />
             </ModalSizable>
@@ -133,7 +133,7 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
             >
               <iframe
                 className='h-full w-full'
-                src='/udt_test.pdf'
+                src={equipment.protocolFilePath || '/404'}
                 title='PDF'
               />
             </ModalSizable>
@@ -144,7 +144,7 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
             >
               <iframe
                 className='h-full w-full'
-                src='/udt_test.pdf'
+                src={equipment.deviceSchematics || '/404'}
                 title='PDF'
               />
             </ModalSizable>
@@ -154,7 +154,7 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
           <h1 className='text-xl font-bold uppercase'>Decyzja:</h1>
           <iframe
             className='h-96 w-full sm:h-[98%]'
-            src='/udt_test.pdf'
+            src={equipment.decisionFilePath || '/404'}
             title='PDF'
           />
         </div>
