@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt';
 import { db } from '@/db';
+import cookieCutter from 'cookie-cutter';
 
 const handler = NextAuth({
   session: {
@@ -17,22 +18,30 @@ const handler = NextAuth({
         password: {},
       },
       async authorize(credentials, req) {
-        const user = await db.user.findUnique({
+        const response = await db.user.findUnique({
           where: {
             email: credentials?.email,
           },
         });
-        console.log('user', user);
-        if (!user) return null; // User not found
 
-        const passwordCorrect = await compare(
-          credentials?.password || '',
-          user.password,
-        );
+        if (response !== null) {
+          const passwordCorrect = await compare(
+            credentials?.password || '',
+            response.password,
+          );
 
-        if (!passwordCorrect) return null; // Incorrect password
+          console.log({ passwordCorrect });
 
-        return user; // Return the entire user object with id and email
+          if (passwordCorrect) {
+            return {
+              id: response.id,
+              email: response.email,
+              user: response,
+            };
+          }
+        }
+
+        return null;
       },
     }),
   ],
