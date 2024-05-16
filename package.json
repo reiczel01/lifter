@@ -9,13 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next-auth/prisma-adapter": "^0.4.4-canary.81",
     "@nextui-org/react": "^2.2.10",
-    "@prisma/client": "^5.13.0",
+    "@prisma/client": "^5.14.0",
+    "bcrypt": "^5.1.1",
     "date-fns": "^3.6.0",
     "eslint-config-prettier": "^9.1.0",
     "framer-motion": "^11.0.28",
     "jsbarcode": "^3.11.6",
     "next": "14.2.1",
+    "next-auth": "^4.24.7",
     "next-barcode": "^1.5.0",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.13",
@@ -24,13 +27,14 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.12.7",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.1",
     "postcss": "^8",
-    "prisma": "^5.13.0",
+    "prisma": "^5.14.0",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"

@@ -5,17 +5,19 @@ import Register from '@/components/Register';
 import EquipmentRegistration from '@/components/EquipmentRegistration';
 import EquipmentCard from '@/components/EquipmentCard';
 import { PrismaClient } from '@prisma/client';
+import { useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import handler from '@/app/api/auth/[...nextauth]/JWT/handler';
+import { getToken } from 'next-auth/jwt';
 
+const secret = process.env.NEXTAUTH_SECRET;
 export default async function Home() {
-  const prisma = new PrismaClient();
-  const allUsers = await prisma.equipment.findMany();
-  console.log(allUsers.map((user) => user.model)); // Wypisze modele wszystkich sprzętów
+  const session = await getServerSession();
+  console.log('session', session);
 
   return (
     <main className='flex flex-col items-center'>
       <LogIn />
-      <Register />
-      <EquipmentRegistration />
     </main>
   );
 }
