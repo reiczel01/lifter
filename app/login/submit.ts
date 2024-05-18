@@ -19,7 +19,7 @@ export default async function loginUser(
   const response = await signIn('credentials', {
     email,
     password,
-    redirect: false,
+    redirect: true,
   });
 
   return { message: 'Zalogowano' };

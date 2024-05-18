@@ -1,22 +1,15 @@
-import Image from 'next/image';
-import { Button } from '@nextui-org/button';
 import LogIn from '@/components/LogIn';
-import Register from '@/components/Register';
-import EquipmentRegistration from '@/components/EquipmentRegistration';
-import EquipmentCard from '@/components/EquipmentCard';
-import { PrismaClient } from '@prisma/client';
-import { useSession } from 'next-auth/react';
-import { getServerSession } from 'next-auth';
-import handler from '@/app/api/auth/[...nextauth]/JWT/handler';
-import { getToken } from 'next-auth/jwt';
+import { getSession } from '@/app/api/auth/session/route';
+import { redirect } from 'next/navigation';
 
 const secret = process.env.NEXTAUTH_SECRET;
 export default async function Home() {
-  const session = await getServerSession();
-  console.log('session', session);
-
+  const session = await getSession();
+  if (session) {
+    redirect('/dashboard/');
+  }
   return (
-    <main className='flex flex-col items-center'>
+    <main className='flex h-screen flex-col items-center justify-center'>
       <LogIn />
     </main>
   );

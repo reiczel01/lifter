@@ -13,6 +13,7 @@ import {
 } from '@nextui-org/react';
 import { useFormState } from 'react-dom';
 import loginUser from '@/app/login/submit';
+import { redirect } from 'next/navigation';
 
 export default function LogIn() {
   const [formState, action] = useFormState(loginUser, { message: '' });
@@ -55,11 +56,7 @@ export default function LogIn() {
         </CardBody>
         <Divider />
         <CardFooter className='w-full'>
-          <Link
-            isExternal
-            showAnchorIcon
-            href='https://github.com/nextui-org/nextui'
-          >
+          <Link showAnchorIcon href='/register'>
             Zarejestruj się.
           </Link>
           <div>{formState.message}</div>

@@ -4,6 +4,8 @@ import './globals.css';
 import { Providers } from './providers';
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
+import { getSession } from '@/app/api/auth/session/route';
+import { redirect } from 'next/navigation';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,9 +22,7 @@ export default function RootLayout({
   return (
     <html lang='pl' className='light'>
       <body className={inter.className}>
-        <NavBar />
         <Providers>{children}</Providers>
-        <Footer />
       </body>
     </html>
   );

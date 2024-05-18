@@ -13,11 +13,18 @@ import {
   Image,
 } from '@nextui-org/react';
 import { usePathname } from 'next/navigation';
+import LogOut from '@/components/LogOut';
+import { cookies } from 'next/headers';
+import { getCookieUserData } from '@/app/api/auth/cookie/route';
+interface NavBarProps {
+  role: string;
+}
 
-export default function NavBar() {
+export default function NavBar(props: NavBarProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const router = usePathname();
   const isActive = (href: string) => router === href;
+
   return (
     <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent className='sm:hidden' justify='start'>
@@ -64,18 +71,20 @@ export default function NavBar() {
       </NavbarContent>
 
       <NavbarContent justify='end'>
-        <NavbarItem className='hidden lg:flex'>
-          <Link href='#'>Login</Link>
+        <NavbarItem>
+          {props.role === 'admin' ? (
+            <Button
+              as={Link}
+              color='warning'
+              href='/dashboard/registerEquipment'
+              variant='flat'
+            >
+              Rejestracja wózka
+            </Button>
+          ) : null}
         </NavbarItem>
         <NavbarItem>
-          <Button
-            as={Link}
-            color='warning'
-            href='/dashboard/registerEquipment'
-            variant='flat'
-          >
-            Rejestracja wózka
-          </Button>
+          <LogOut />
         </NavbarItem>
       </NavbarContent>
 

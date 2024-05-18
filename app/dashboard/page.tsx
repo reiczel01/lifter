@@ -3,10 +3,13 @@ import EquipmentCard from '@/components/EquipmentCard';
 import { Input } from '@nextui-org/react';
 import { SearchIcon } from '@nextui-org/shared-icons';
 import { db } from '@/db';
+import { getServerSession } from 'next-auth';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Dashboard() {
+  const session = await getServerSession();
+  console.log('session', session);
   const allEquipment = await db.equipment.findMany({
     include: {
       fault: {

@@ -2,7 +2,20 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt';
 import { db } from '@/db';
-import cookieCutter from 'cookie-cutter';
+
+import { cookies } from 'next/headers';
+import { json } from 'node:stream/consumers';
+interface User {
+  id: string;
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  licenceNumber?: string | null;
+  peselNumber?: number | null;
+  permissionsValidityDate?: Date | null;
+  role?: string | null;
+}
 
 const handler = NextAuth({
   session: {
@@ -18,7 +31,23 @@ const handler = NextAuth({
         password: {},
       },
       async authorize(credentials, req) {
-        const response = await db.user.findUnique({
+        const response: User | null = await db.user.findUnique({
+          select: {
+            id: true,
+            name: true,
+            surname: true,
+            email: true,
+            password: true,
+            licenceNumber: true,
+            peselNumber: true,
+            permissionsValidityDate: true,
+            role: true,
+            permissions: {
+              select: {
+                id: true,
+              },
+            },
+          },
           where: {
             email: credentials?.email,
           },
@@ -31,13 +60,19 @@ const handler = NextAuth({
           );
 
           console.log({ passwordCorrect });
-
+          const { password, ...responseWithoutPassword } = response;
           if (passwordCorrect) {
-            return {
-              id: response.id,
-              email: response.email,
-              user: response,
-            };
+            cookies().set(
+              'user-data',
+              JSON.stringify(responseWithoutPassword),
+              {
+                path: '/',
+                domain: 'localhost',
+                httpOnly: true,
+                secure: false,
+              },
+            );
+            return response;
           }
         }
 
@@ -45,14 +80,6 @@ const handler = NextAuth({
       },
     }),
   ],
-  callbacks: {
-    async session({ session, user }) {
-      if (user) {
-        session.user.id = user.id; // Add user.id to the session
-      }
-      return session;
-    },
-  },
 });
 
 export { handler as GET, handler as POST };
