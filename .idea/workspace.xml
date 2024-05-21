@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6842891-5e4d-4e8a-bcdb-54b7728620dc" name="Changes" comment="Working adding equipment">
+      <change afterPath="$PROJECT_DIR$/app/dashboard/equipment/[id]/handler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_04_2024__18_26__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_04_2024__18_26__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/dashboard/equipment/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/equipment/[id]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/TabelOfUsage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/TabelOfUsage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/migrations/20240515185654_init/migration.sql" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/migrations/20240521052632_init/migration.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,9 +68,9 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.Next.js.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "/Users/mateuszreczulski/Documents/Programowanie/lifter/node_modules/prettier",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Mateusz\\Desktop\\lifter\\node_modules\\prettier",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/mateuszreczulski/Documents/Programowanie/lifter/node_modules/typescript/lib",
+    "ts.external.directory.path": "C:\\Users\\Mateusz\\Desktop\\lifter\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>

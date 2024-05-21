@@ -67,6 +67,17 @@ CREATE TABLE `Permission` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `UserLog` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `comment` VARCHAR(191) NOT NULL DEFAULT 'Brak uwag',
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `userId` VARCHAR(191) NOT NULL,
+    `equipmentId` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `_EquipmentToType` (
     `A` INTEGER NOT NULL,
     `B` INTEGER NOT NULL,
@@ -101,6 +112,12 @@ CREATE TABLE `_PermissionToUser` (
     UNIQUE INDEX `_PermissionToUser_AB_unique`(`A`, `B`),
     INDEX `_PermissionToUser_B_index`(`B`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `UserLog` ADD CONSTRAINT `UserLog_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `UserLog` ADD CONSTRAINT `UserLog_equipmentId_fkey` FOREIGN KEY (`equipmentId`) REFERENCES `Equipment`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `_EquipmentToType` ADD CONSTRAINT `_EquipmentToType_A_fkey` FOREIGN KEY (`A`) REFERENCES `Equipment`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

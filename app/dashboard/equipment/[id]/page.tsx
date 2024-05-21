@@ -14,6 +14,7 @@ import { pl } from 'date-fns/locale';
 import React from 'react';
 import ModalSizable from '@/components/ModalSizable';
 import FaultCard from '@/components/FaultCard';
+
 import {
   Table,
   TableHeader,
@@ -24,6 +25,10 @@ import {
 } from '@nextui-org/react';
 import TabelOfUsage from '@/components/TabelOfUsage';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+import RegisterUserUsage from '@/app/dashboard/equipment/[id]/RegisterUserUsage';
+import { getSession } from '@/app/api/auth/session/route';
+import { cookies } from 'next/headers';
 
 export default async function EquipmentPage({
   params,
@@ -48,6 +53,22 @@ export default async function EquipmentPage({
         },
       },
       permissions: true,
+      type: true,
+    },
+  });
+
+  const session = await getSession();
+  const data = JSON.parse(
+    (cookies().get('user-data')?.value as string) || '{}',
+  );
+
+  const userLogs = await db.userLog.findMany({
+    orderBy: { createdAt: 'desc' },
+    where: {
+      equipmentId: Number(params.id),
+    },
+    include: {
+      user: true,
     },
   });
 
@@ -64,6 +85,14 @@ export default async function EquipmentPage({
     const date = new Date(dateString);
     return format(date, 'dd MMMM yyyy, HH:mm:ss', { locale: pl });
   }
+
+  function registerUserUsage() {
+    console.log('registerUserUsage');
+  }
+
+  const handleClicked = () => {
+    registerUserUsage();
+  };
 
   const faulty =
     equipment.fault && equipment.fault[0] ? equipment.fault[0].present : false;
@@ -164,8 +193,9 @@ export default async function EquipmentPage({
           <h1 className='mb-3 mt-1 text-xl font-bold'>
             Historia urzytkowania:
           </h1>
+          <RegisterUserUsage equipmentId={params.id} userId={data.id} />
           <div className='h-96 overflow-scroll bg-transparent p-1'>
-            <TabelOfUsage id={1} />
+            <TabelOfUsage userLogs={userLogs} />
           </div>
         </div>
         <div className=' flex-1  rounded-lg bg-white p-4 shadow lg:w-1/2 lg:flex-none'>
