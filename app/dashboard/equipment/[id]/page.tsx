@@ -1,34 +1,18 @@
 import { notFound } from 'next/navigation';
 import { db } from '@/db';
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Divider,
-  Tooltip,
-} from '@nextui-org/react';
+import { Card, CardHeader, Divider } from '@nextui-org/react';
 import Barcode from '@/components/barcode';
 import { format } from 'date-fns'; // Usunięto nieużywany import
 import { pl } from 'date-fns/locale';
 import React from 'react';
 import ModalSizable from '@/components/ModalSizable';
 import FaultCard from '@/components/FaultCard';
-
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-} from '@nextui-org/react';
 import TabelOfUsage from '@/components/TabelOfUsage';
-import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
 import RegisterUserUsage from '@/app/dashboard/equipment/[id]/RegisterUserUsage';
+import RegisterFault from '@/app/dashboard/equipment/[id]/RegisterFault';
 import { getSession } from '@/app/api/auth/session/route';
 import { cookies } from 'next/headers';
+import EditFault from '@/components/EditFault';
 
 export default async function EquipmentPage({
   params,
@@ -50,6 +34,7 @@ export default async function EquipmentPage({
           createdAt: true,
           description: true,
           solution: true,
+          updatedAt: true,
         },
       },
       permissions: true,
@@ -190,20 +175,28 @@ export default async function EquipmentPage({
       </div>
       <div className={`mt-4 flex flex-col gap-4 lg:flex-row`}>
         <div className='flex-1 rounded-lg bg-white p-4 shadow lg:w-1/2 lg:flex-none'>
-          <h1 className='mb-3 mt-1 text-xl font-bold'>
-            Historia urzytkowania:
-          </h1>
-          <RegisterUserUsage equipmentId={params.id} userId={data.id} />
+          <div className='flex w-full flex-row justify-between'>
+            <h1 className='mb-3 mt-1 text-xl font-bold'>
+              Historia urzytkowania:
+            </h1>
+            <RegisterUserUsage equipmentId={params.id} userId={data.id} />
+          </div>
           <div className='h-96 overflow-scroll bg-transparent p-1'>
             <TabelOfUsage userLogs={userLogs} />
           </div>
         </div>
         <div className=' flex-1  rounded-lg bg-white p-4 shadow lg:w-1/2 lg:flex-none'>
-          <h1 className='mb-3 mt-1 text-xl font-bold'>Historia usterek:</h1>
+          <div className='flex w-full flex-row justify-between'>
+            <h1 className='mb-3 mt-1 text-xl font-bold'>Historia usterek:</h1>
+            <RegisterFault equipmentId={params.id} userId={data.id} />
+          </div>
           <div className='h-96 overflow-scroll bg-transparent p-1'>
             {equipment.fault?.map((fault) => (
               <FaultCard
                 key={fault.id}
+                id={fault.id}
+                updatedAt={formatDateTime(fault.updatedAt)}
+                role={data.role}
                 present={fault.present}
                 title={fault.title}
                 description={fault.description}

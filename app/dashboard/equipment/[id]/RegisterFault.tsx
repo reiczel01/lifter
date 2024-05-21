@@ -2,7 +2,10 @@
 import { Button, Input } from '@nextui-org/react';
 import React, { useEffect } from 'react';
 import { Textarea } from '@nextui-org/react';
-import { registerUserUsage } from '@/app/dashboard/equipment/[id]/handler';
+import {
+  registerFault,
+  registerUserUsage,
+} from '@/app/dashboard/equipment/[id]/handler';
 import { useFormState } from 'react-dom';
 import { redirect } from 'next/navigation';
 import { wait } from 'next/dist/lib/wait';
@@ -19,7 +22,7 @@ export default function RegisterUserUsage({
   equipmentId,
   userId,
 }: RegisterUserUsageProps) {
-  const [formState, action] = useFormState(registerUserUsage, { message: '' });
+  const [formState, action] = useFormState(registerFault, { message: '' });
 
   const router = useRouter();
   useEffect(() => {
@@ -36,17 +39,23 @@ export default function RegisterUserUsage({
   console.log('equipmentId', equipmentId);
   return (
     <ModalSizable
-      title={'Rejestrowanie podjęcia urządzenia'}
+      title={'Rejestrowanie usterkę'}
       size={'md'}
       className={'float-end w-1/2'}
     >
       <form action={action}>
         <div className='flex w-full flex-col content-between items-center justify-center gap-5'>
+          <Input
+            name='title'
+            label='Tytuł'
+            required
+            placeholder='Wprowadź tytuł...'
+          />
           <Textarea
-            name='comment'
-            label='Uwagi'
-            placeholder='Wpisz uwagi...'
-            className='max-w-xs'
+            name='description'
+            label='Opis usterki'
+            placeholder='Opisz usterkę...'
+            className='max-w'
           />
           <Input className='hidden' name='equipmentId' value={equipmentId} />
           <Input className='hidden' name='userId' value={userId} />

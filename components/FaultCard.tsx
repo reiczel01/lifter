@@ -1,5 +1,7 @@
+'use client';
 import React from 'react';
 import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/react';
+import { deleteFault } from '@/app/dashboard/equipment/[id]/handler';
 
 export default function FaultCard({
   present,
@@ -7,7 +9,10 @@ export default function FaultCard({
   description,
   solution,
   createdAt,
+  updatedAt,
   className,
+  role,
+  id,
 }: Readonly<{
   present: boolean;
   title: string;
@@ -15,7 +20,20 @@ export default function FaultCard({
   solution?: string | null;
   createdAt: string;
   className?: string;
+  updatedAt: string;
+  role: string;
+  id: number;
 }>) {
+  const handleDelete = async () => {
+    try {
+      await deleteFault(id);
+      alert('Usterka została usunięta');
+      // Możesz dodać tutaj dodatkową logikę np. odświeżenie listy usterek
+    } catch (error) {
+      console.error('Error deleting fault:', error);
+      alert('Wystąpił błąd podczas usuwania usterki');
+    }
+  };
   return (
     <Card className={className}>
       <CardHeader className='justify-between'>
@@ -24,7 +42,13 @@ export default function FaultCard({
             <h1 className='text-medium font-semibold leading-none text-default-600'>
               {title}
             </h1>
-            <span className='text-small text-default-600'>{createdAt}</span>
+            <span className='text-small text-default-600'>
+              Utworzona: {createdAt}
+            </span>
+
+            <span className='text-small text-default-600'>
+              Edytowane: {updatedAt}
+            </span>
           </div>
         </div>
       </CardHeader>
@@ -36,7 +60,7 @@ export default function FaultCard({
           <span className='py-2'>{solution}</span>
         </span>
       </CardBody>
-      <CardFooter className='gap-2'>
+      <CardFooter className='flex flex-col gap-2'>
         {present && (
           <Card className='w-full'>
             <CardHeader className='flex justify-center gap-2 bg-red-600'>
@@ -63,6 +87,16 @@ export default function FaultCard({
               </h1>
             </CardHeader>
           </Card>
+        )}
+        {role === 'admin' || role === 'technician' ? (
+          <div className='flex gap-2'>
+            <button className='btn btn-primary'>Edytuj</button>
+            <button onClick={handleDelete} className='btn btn-danger'>
+              Usuń
+            </button>
+          </div>
+        ) : (
+          <></>
         )}
       </CardFooter>
     </Card>

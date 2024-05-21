@@ -16,7 +16,7 @@ async function LayoutPage({ children }) {
     data = JSON.parse((cookies().get('user-data')?.value as string) || '{}');
   }
   return (
-    <main className='flex flex-col'>
+    <main className='flex flex-col bg-gray-200'>
       {session && <NavBar role={data.role} />}
       {children}
       <Footer />
