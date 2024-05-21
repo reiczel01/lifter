@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from '@nextui-org/react';
 import Barcode from '@/components/barcode';
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns'; // Usunięto nieużywany import
 import { pl } from 'date-fns/locale';
 import React from 'react';
 import ModalSizable from '@/components/ModalSizable';
@@ -23,17 +23,17 @@ import {
   TableCell,
 } from '@nextui-org/react';
 import TabelOfUsage from '@/components/TabelOfUsage';
+import { useRouter } from 'next/router';
 
-interface EquipmentPageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function EquipmentPage(props: EquipmentPageProps) {
+export default async function EquipmentPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  console.log(params.id);
   const equipment = await db.equipment.findFirst({
     where: {
-      id: parseInt(props.params.id),
+      id: Number(params.id),
     },
     include: {
       fault: {
@@ -48,7 +48,6 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
         },
       },
       permissions: true,
-      type: true,
     },
   });
 
@@ -65,6 +64,7 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
     const date = new Date(dateString);
     return format(date, 'dd MMMM yyyy, HH:mm:ss', { locale: pl });
   }
+
   const faulty =
     equipment.fault && equipment.fault[0] ? equipment.fault[0].present : false;
 
@@ -165,13 +165,13 @@ export default async function EquipmentPage(props: EquipmentPageProps) {
             Historia urzytkowania:
           </h1>
           <div className='h-96 overflow-scroll bg-transparent p-1'>
-            <TabelOfUsage />
+            <TabelOfUsage id={1} />
           </div>
         </div>
         <div className=' flex-1  rounded-lg bg-white p-4 shadow lg:w-1/2 lg:flex-none'>
           <h1 className='mb-3 mt-1 text-xl font-bold'>Historia usterek:</h1>
           <div className='h-96 overflow-scroll bg-transparent p-1'>
-            {equipment.fault.map((fault) => (
+            {equipment.fault?.map((fault) => (
               <FaultCard
                 key={fault.id}
                 present={fault.present}

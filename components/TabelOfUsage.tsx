@@ -1,4 +1,4 @@
-'use client';
+'use server';
 import React from 'react';
 import {
   Table,
@@ -8,209 +8,41 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/react';
+import { db } from '@/db';
+import { format } from 'date-fns';
+import { pl } from 'date-fns/locale';
 
-export default function TabelOfUsage() {
+interface Raws {
+  id: number;
+}
+export default async function TabelOfUsage(props: Raws) {
+  const userLog = await db.userLog.findMany({
+    where: {
+      equipmentId: props.id,
+    },
+    include: {
+      user: true,
+    },
+  });
+  function formatDateTime(dateString: any) {
+    const date = new Date(dateString);
+    return format(date, 'dd MMMM yyyy, HH:mm:ss', { locale: pl });
+  }
   return (
     <Table isStriped aria-label='Example static collection table '>
       <TableHeader>
         <TableColumn>URZYTKOWNIK</TableColumn>
         <TableColumn>UWAGI</TableColumn>
         <TableColumn>CZAS POBRANIA</TableColumn>
-        <TableColumn>STATUS</TableColumn>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell>Mateusz Reczulski</TableCell>
-          <TableCell>BRAK</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Zoey Lang</TableCell>
-          <TableCell>Technical Lead</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Paused</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Jane Fisher</TableCell>
-          <TableCell>Senior Developer</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>William Howard</TableCell>
-          <TableCell>Community Manager</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Vacation</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Mateusz Reczulski</TableCell>
-          <TableCell>BRAK</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Zoey Lang</TableCell>
-          <TableCell>Technical Lead</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Paused</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Jane Fisher</TableCell>
-          <TableCell>Senior Developer</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>William Howard</TableCell>
-          <TableCell>Community Manager</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Vacation</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Mateusz Reczulski</TableCell>
-          <TableCell>BRAK</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Zoey Lang</TableCell>
-          <TableCell>Technical Lead</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Paused</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Jane Fisher</TableCell>
-          <TableCell>Senior Developer</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>William Howard</TableCell>
-          <TableCell>Community Manager</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Vacation</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Mateusz Reczulski</TableCell>
-          <TableCell>BRAK</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Zoey Lang</TableCell>
-          <TableCell>Technical Lead</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Paused</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Jane Fisher</TableCell>
-          <TableCell>Senior Developer</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>William Howard</TableCell>
-          <TableCell>Community Manager</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Vacation</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Mateusz Reczulski</TableCell>
-          <TableCell>BRAK</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Zoey Lang</TableCell>
-          <TableCell>Technical Lead</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Paused</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Jane Fisher</TableCell>
-          <TableCell>Senior Developer</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>William Howard</TableCell>
-          <TableCell>Community Manager</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Vacation</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Mateusz Reczulski</TableCell>
-          <TableCell>BRAK</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Zoey Lang</TableCell>
-          <TableCell>Technical Lead</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Paused</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Jane Fisher</TableCell>
-          <TableCell>Senior Developer</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>William Howard</TableCell>
-          <TableCell>Community Manager</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Vacation</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Mateusz Reczulski</TableCell>
-          <TableCell>BRAK</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Zoey Lang</TableCell>
-          <TableCell>Technical Lead</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Paused</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Jane Fisher</TableCell>
-          <TableCell>Senior Developer</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>William Howard</TableCell>
-          <TableCell>Community Manager</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Vacation</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Mateusz Reczulski</TableCell>
-          <TableCell>BRAK</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Zoey Lang</TableCell>
-          <TableCell>Technical Lead</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Paused</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Jane Fisher</TableCell>
-          <TableCell>Senior Developer</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Active</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>William Howard</TableCell>
-          <TableCell>Community Manager</TableCell>
-          <TableCell>12.12.2021, 12:34:12</TableCell>
-          <TableCell>Vacation</TableCell>
-        </TableRow>
+        {userLog.map((item) => (
+          <TableRow key={item.id}>
+            <TableCell>{item.user.name}</TableCell>
+            <TableCell>{item.comment}</TableCell>
+            <TableCell>{formatDateTime(item.createdAt)}</TableCell>
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
   );

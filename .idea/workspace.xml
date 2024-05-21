@@ -5,24 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6842891-5e4d-4e8a-bcdb-54b7728620dc" name="Changes" comment="Working adding equipment">
-      <change afterPath="$PROJECT_DIR$/app/api/auth/cookie/route.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/auth/session/route.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/register/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/LogOut.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/dashboard/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/login/submit.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/login/submit.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/register/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/register/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/register/submit.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/register/submit.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LogIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LogIn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/NavBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dashboard/equipment/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/equipment/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/TabelOfUsage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/TabelOfUsage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +57,7 @@
     "Docker.DB.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "nextauth",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "/Users/mateuszreczulski/Documents/Programowanie/lifter/app/dashboard/tasks",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
