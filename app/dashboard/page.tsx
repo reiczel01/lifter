@@ -67,6 +67,7 @@ export default async function Dashboard() {
             model={equipment.model}
             evidenceId={equipment.registrationNumber}
             isDisabled={equipment.fault[0]?.present || false}
+            validityDate={equipment.validityDate < new Date()}
             issueDescription={equipment.fault[0]?.description || ''}
             maxLoad={equipment.liftingCapacityKg}
           />

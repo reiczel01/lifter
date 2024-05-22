@@ -6,29 +6,49 @@ import {
   CardFooter,
   CardHeader,
   Checkbox,
-  CheckboxGroup,
   Divider,
-  Image,
   Input,
   Link,
-  Tooltip,
+  Textarea,
 } from '@nextui-org/react';
-import { Textarea } from '@nextui-org/react';
 import { ArrowRightIcon } from '@nextui-org/shared-icons';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormState } from 'react-dom';
-import { registerFault } from '@/app/dashboard/equipment/[id]/handler';
 import { editFault } from '@/app/dashboard/editFault/[...editFault]/handler';
+import { useParams, useRouter } from 'next/navigation';
 
-interface paramsFault {
-  params: {
-    slug: string[];
-  };
-}
+export default function EditFault() {
+  const params = useParams();
+  const editFaultParams = Array.isArray(params.editFault)
+    ? params.editFault
+    : [];
+  const decodedParams = editFaultParams.map((param) =>
+    decodeURIComponent(param),
+  );
 
-export default function EditFault({ params }: paramsFault) {
+  const [id, userId, description, solution, title, present, equipmentId] =
+    decodedParams;
   const [formState, action] = useFormState(editFault, { message: '' });
-  console.log('params', params.slug);
+
+  const [isPresent, setIsPresent] = React.useState(present === 'true');
+
+  let solutionValue = solution;
+  if (solution === 'null') {
+    solutionValue = '';
+  }
+  console.log(present);
+
+  const router = useRouter();
+  useEffect(() => {
+    if (formState.message === 'Uaktualniono usterkę') {
+      const timer = setTimeout(() => {
+        router.push(`/dashboard/equipment/${equipmentId}`);
+      }, 4000);
+
+      // Clean up the timer on unmount or if formState.message changes
+      return () => clearTimeout(timer);
+    }
+  }, [formState.message, router]);
   return (
     <div className='flex w-full flex-col items-center '>
       <form className='w-1/2' action={action}>
@@ -45,6 +65,7 @@ export default function EditFault({ params }: paramsFault) {
               <Input
                 isRequired
                 name='title'
+                defaultValue={title}
                 type='string'
                 label='Tytuł'
                 className='mt-4'
@@ -53,24 +74,32 @@ export default function EditFault({ params }: paramsFault) {
               <Textarea
                 label='Opis usterki'
                 name='description'
+                defaultValue={description}
                 type='string'
                 className='mt-4 w-full'
               />
               <Textarea
                 label='Opis rozwiazania'
                 name='solution'
+                defaultValue={solutionValue}
                 type='string'
                 placeholder='Opisz rozwiazanie...'
                 className='mt-4 w-full'
               />
-              <Input name='userId' className={'hidden'} />
-              <Input name='id' className={'hidden'} />
-              <Checkbox name='present' className='mt-4'>
+              <Input name='userId' defaultValue={userId} className={'hidden'} />
+              <Input name='id' defaultValue={id} className={'hidden'} />
+              <Checkbox
+                name='present'
+                isSelected={isPresent}
+                onValueChange={setIsPresent}
+                defaultSelected={present === 'true'}
+                value={isPresent ? 'true' : 'false'}
+                className='mt-4'
+              >
                 Czy usterka nadal występuje?
               </Checkbox>
             </div>
           </CardBody>
-
           <Divider />
           <CardFooter className='w-full justify-between'>
             <Link

@@ -82,6 +82,8 @@ export default async function EquipmentPage({
   const faulty =
     equipment.fault && equipment.fault[0] ? equipment.fault[0].present : false;
 
+  const currentDate = new Date();
+
   return (
     <main className={`my-4 flex flex-col px-4 sm:px-6 lg:px-8`}>
       <div className={`flex flex-col gap-4 lg:flex-row `}>
@@ -91,6 +93,17 @@ export default async function EquipmentPage({
               <CardHeader className='flex animate-pulse justify-center gap-3 bg-red-600'>
                 <h1 className='text-3xl font-bold uppercase text-white'>
                   UWAGA: usterka sprzętu
+                </h1>
+              </CardHeader>
+            </Card>
+          </div>
+          <div
+            className={`mb-4 mt-2 ${equipment.validityDate < currentDate ? '' : 'hidden'}`}
+          >
+            <Card>
+              <CardHeader className='flex animate-pulse justify-center gap-3 bg-orange-600'>
+                <h1 className='text-3xl font-bold uppercase text-white'>
+                  UWAGA: BRAK WAŻNEJ DECYZJI
                 </h1>
               </CardHeader>
             </Card>
@@ -179,7 +192,11 @@ export default async function EquipmentPage({
             <h1 className='mb-3 mt-1 text-xl font-bold'>
               Historia urzytkowania:
             </h1>
-            <RegisterUserUsage equipmentId={params.id} userId={data.id} />
+            {faulty || equipment.validityDate < currentDate ? (
+              <></>
+            ) : (
+              <RegisterUserUsage equipmentId={params.id} userId={data.id} />
+            )}
           </div>
           <div className='h-96 overflow-scroll bg-transparent p-1'>
             <TabelOfUsage userLogs={userLogs} />
@@ -196,6 +213,7 @@ export default async function EquipmentPage({
                 key={fault.id}
                 id={fault.id}
                 userId={data.id}
+                equipmentId={Number(params.id)}
                 updatedAt={formatDateTime(fault.updatedAt)}
                 role={data.role}
                 present={fault.present}

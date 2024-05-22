@@ -67,7 +67,6 @@ const handler = NextAuth({
               JSON.stringify(responseWithoutPassword),
               {
                 path: '/',
-                domain: 'localhost',
                 httpOnly: true,
                 secure: false,
               },

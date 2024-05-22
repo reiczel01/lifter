@@ -1,6 +1,12 @@
 'use client';
 import React from 'react';
-import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/react';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+} from '@nextui-org/react';
 import { deleteFault } from '@/app/dashboard/equipment/[id]/handler';
 import { useRouter } from 'next/navigation';
 
@@ -14,6 +20,7 @@ export default function FaultCard({
   className,
   role,
   userId,
+  equipmentId,
   id,
 }: Readonly<{
   present: boolean;
@@ -26,6 +33,7 @@ export default function FaultCard({
   role: string;
   userId: number;
   id: number;
+  equipmentId: number;
 }>) {
   const router = useRouter();
   const handleDelete = async () => {
@@ -40,7 +48,7 @@ export default function FaultCard({
   };
   const handleEdit = async () => {
     router.push(
-      `/dashboard/editFault/${id}/${userId}/${description}/${solution}/${title}/${present}`,
+      `/dashboard/editFault/${id}/${userId}/${description}/${solution}/${title}/${present}/${equipmentId}`,
     );
   };
   return (
@@ -60,6 +68,18 @@ export default function FaultCard({
             </span>
           </div>
         </div>
+        {role === 'admin' || role === 'technician' ? (
+          <div className='m-3 flex gap-2 rounded-2xl bg-gray-200 p-3'>
+            <Button color='primary' variant='light' onClick={handleEdit}>
+              Edytuj
+            </Button>
+            <Button onClick={handleDelete} color='danger' variant='light'>
+              Usuń
+            </Button>
+          </div>
+        ) : (
+          <></>
+        )}
       </CardHeader>
       <CardBody className='px-3 py-0 text-small text-default-600'>
         <h3 className='font-bold'>Opis usterki:</h3>
@@ -96,18 +116,6 @@ export default function FaultCard({
               </h1>
             </CardHeader>
           </Card>
-        )}
-        {role === 'admin' || role === 'technician' ? (
-          <div className='flex gap-2'>
-            <button className='btn btn-primary' onClick={handleEdit}>
-              Edytuj
-            </button>
-            <button onClick={handleDelete} className='btn btn-danger'>
-              Usuń
-            </button>
-          </div>
-        ) : (
-          <></>
         )}
       </CardFooter>
     </Card>
