@@ -1,3 +1,4 @@
+'use client';
 import {
   Button,
   Card,
@@ -15,11 +16,22 @@ import {
 import { Textarea } from '@nextui-org/react';
 import { ArrowRightIcon } from '@nextui-org/shared-icons';
 import React from 'react';
+import { useFormState } from 'react-dom';
+import { registerFault } from '@/app/dashboard/equipment/[id]/handler';
+import { editFault } from '@/app/dashboard/editFault/[...editFault]/handler';
 
-export default function EditFault() {
+interface paramsFault {
+  params: {
+    slug: string[];
+  };
+}
+
+export default function EditFault({ params }: paramsFault) {
+  const [formState, action] = useFormState(editFault, { message: '' });
+  console.log('params', params.slug);
   return (
     <div className='flex w-full flex-col items-center '>
-      <form className='w-1/2'>
+      <form className='w-1/2' action={action}>
         <Card className='mt-4 w-full items-center'>
           <CardHeader className='flex w-full flex-col items-center gap-4 md:flex-row'>
             <div className='flex flex-col pr-6'>
@@ -42,7 +54,6 @@ export default function EditFault() {
                 label='Opis usterki'
                 name='description'
                 type='string'
-                placeholder='Opisz usterkę...'
                 className='mt-4 w-full'
               />
               <Textarea
@@ -52,7 +63,9 @@ export default function EditFault() {
                 placeholder='Opisz rozwiazanie...'
                 className='mt-4 w-full'
               />
-              <Checkbox defaultSelected name='present' className='mt-4'>
+              <Input name='userId' className={'hidden'} />
+              <Input name='id' className={'hidden'} />
+              <Checkbox name='present' className='mt-4'>
                 Czy usterka nadal występuje?
               </Checkbox>
             </div>
@@ -67,7 +80,7 @@ export default function EditFault() {
             >
               Wymagania UDT
             </Link>
-            <div></div>
+            <div>{formState.message}</div>
             <Button
               color='primary'
               type='submit'

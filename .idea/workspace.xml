@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6842891-5e4d-4e8a-bcdb-54b7728620dc" name="Changes" comment="Working adding equipment">
-      <change afterPath="$PROJECT_DIR$/app/dashboard/editFault/[...editFault]/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/dashboard/equipment/[id]/RegisterFault.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/EditFault.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/dashboard/equipment/[id]/RegisterUserUsage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/equipment/[id]/RegisterUserUsage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/dashboard/equipment/[id]/handler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/equipment/[id]/handler.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/dashboard/equipment/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/equipment/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/dashboard/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/FaultCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/FaultCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/migrations/20240521052632_init/migration.sql" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/migrations/20240521190055_init/migration.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/migrations/20240521190055_init/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/migrations/migration_lock.toml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +67,7 @@
     "npm.Next.js.executor": "Run",
     "prettierjs.PrettierConfiguration.Package": "/Users/mateuszreczulski/Documents/Programowanie/lifter/node_modules/prettier",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/mateuszreczulski/Documents/Programowanie/lifter/node_modules/typescript/lib",
+    "ts.external.directory.path": "C:\\Users\\Mateusz\\Desktop\\lifter\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -121,7 +113,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-2e7d6887c066-JavaScript-WS-241.15989.47" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
       </set>
     </attachedChunks>
   </component>
@@ -145,6 +137,7 @@
       <workItem from="1713604308917" duration="12487000" />
       <workItem from="1713776182694" duration="5253000" />
       <workItem from="1714130818154" duration="2371000" />
+      <workItem from="1716372737812" duration="335000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />

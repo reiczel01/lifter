@@ -195,6 +195,7 @@ export default async function EquipmentPage({
               <FaultCard
                 key={fault.id}
                 id={fault.id}
+                userId={data.id}
                 updatedAt={formatDateTime(fault.updatedAt)}
                 role={data.role}
                 present={fault.present}

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/react';
 import { deleteFault } from '@/app/dashboard/equipment/[id]/handler';
+import { useRouter } from 'next/navigation';
 
 export default function FaultCard({
   present,
@@ -12,6 +13,7 @@ export default function FaultCard({
   updatedAt,
   className,
   role,
+  userId,
   id,
 }: Readonly<{
   present: boolean;
@@ -22,8 +24,10 @@ export default function FaultCard({
   className?: string;
   updatedAt: string;
   role: string;
+  userId: number;
   id: number;
 }>) {
+  const router = useRouter();
   const handleDelete = async () => {
     try {
       await deleteFault(id);
@@ -33,6 +37,11 @@ export default function FaultCard({
       console.error('Error deleting fault:', error);
       alert('Wystąpił błąd podczas usuwania usterki');
     }
+  };
+  const handleEdit = async () => {
+    router.push(
+      `/dashboard/editFault/${id}/${userId}/${description}/${solution}/${title}/${present}`,
+    );
   };
   return (
     <Card className={className}>
@@ -90,7 +99,9 @@ export default function FaultCard({
         )}
         {role === 'admin' || role === 'technician' ? (
           <div className='flex gap-2'>
-            <button className='btn btn-primary'>Edytuj</button>
+            <button className='btn btn-primary' onClick={handleEdit}>
+              Edytuj
+            </button>
             <button onClick={handleDelete} className='btn btn-danger'>
               Usuń
             </button>
