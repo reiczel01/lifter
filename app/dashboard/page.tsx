@@ -58,7 +58,7 @@ export default async function Dashboard() {
           </div>
         </div>
       </div>
-      <div className='m-5 grid grid-cols-1 items-center gap-5 md:grid-cols-4'>
+      <div className='m-4 flex flex-col items-center gap-2 md:flex-row md:flex-wrap md:justify-between'>
         {allEquipment.map((equipment) => (
           <EquipmentCard
             key={equipment.id}

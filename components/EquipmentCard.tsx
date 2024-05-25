@@ -38,7 +38,7 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
     : '';
   return (
     <Link href={`/dashboard/equipment/${id}`}>
-      <Card shadow='sm' isPressable>
+      <Card shadow='sm' className='max-w-[21rem]' isPressable>
         <CardBody
           className={`overflow-visible p-0 ${isDisabled ? 'bg-red-500' : 'bg-green-500'} ${validityDate ? 'bg-orange-500' : ''}`}
           style={{ height: '100%' }}

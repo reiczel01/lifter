@@ -39,7 +39,10 @@ export default function NavBar(props: NavBarProps) {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className='hidden gap-4 sm:flex' justify='center'>
+      <NavbarContent
+        className='hidden gap-4 uppercase sm:flex'
+        justify='center'
+      >
         <NavbarBrand>
           <Image
             height={35}
@@ -61,11 +64,21 @@ export default function NavBar(props: NavBarProps) {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href='#'>Customers</Link>
+          <Link
+            color='foreground'
+            className={isActive('/tasks') ? 'font-bold text-blue-700' : ''}
+            href='/tasks'
+          >
+            Zadania
+          </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color='foreground' href='#'>
-            Integrations
+          <Link
+            color='foreground'
+            className={isActive('/user') ? 'font-bold text-blue-700' : ''}
+            href='/user'
+          >
+            Profil operatora
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -89,14 +102,30 @@ export default function NavBar(props: NavBarProps) {
       </NavbarContent>
 
       <NavbarMenu>
-        <NavbarMenuItem>
+        <NavbarMenuItem className='text-4xl font-bold uppercase'>
           <Link
-            className='w-full'
+            className={`w-full ${isActive('/dashboard') ? 'text-blue-700' : ''}`}
             color={'foreground'}
             href='/dashboard'
             size='lg'
           >
             Tablica
+          </Link>
+          <Link
+            className={`w-full ${isActive('/tasks') ? 'text-blue-700' : ''}`}
+            color={'foreground'}
+            href='/tasks'
+            size='lg'
+          >
+            Zadania
+          </Link>
+          <Link
+            className={`w-full ${isActive('/tasks') ? 'text-blue-700' : ''}`}
+            color={'foreground'}
+            href='/user'
+            size='lg'
+          >
+            Profil operatora
           </Link>
         </NavbarMenuItem>
       </NavbarMenu>

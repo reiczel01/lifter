@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6842891-5e4d-4e8a-bcdb-54b7728620dc" name="Changes" comment="Working table, registering usage, started to make fault logic and forms">
+    <list default="true" id="b6842891-5e4d-4e8a-bcdb-54b7728620dc" name="Changes" comment="Working adding equipment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/auth/cookie/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/cookie/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/EquipmentCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/EquipmentCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LogOut.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LogOut.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/NavBar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +70,7 @@
     &quot;npm.Next.js.executor&quot;: &quot;Run&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/mateuszreczulski/Documents/Programowanie/lifter/node_modules/prettier&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/mateuszreczulski/Documents/Programowanie/lifter/node_modules/typescript/lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Mateusz\\Desktop\\lifter\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -109,6 +113,13 @@
       <item itemvalue="npm.Next.js" />
     </list>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -130,7 +141,6 @@
       <workItem from="1713776182694" duration="5253000" />
       <workItem from="1714130818154" duration="2371000" />
       <workItem from="1716372737812" duration="335000" />
-      <workItem from="1716480766622" duration="936000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -188,15 +198,7 @@
       <option name="project" value="LOCAL" />
       <updated>1715836430882</updated>
     </task>
-    <task id="LOCAL-00008" summary="Working table, registering usage, started to make fault logic and forms">
-      <option name="closed" value="true" />
-      <created>1716404559914</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1716404559914</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,7 +210,6 @@
     <MESSAGE value="Register, RegisterEquipment(just created not done)" />
     <MESSAGE value="Equipment site rought preMake" />
     <MESSAGE value="Working adding equipment" />
-    <MESSAGE value="Working table, registering usage, started to make fault logic and forms" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working table, registering usage, started to make fault logic and forms" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working adding equipment" />
   </component>
 </project>
