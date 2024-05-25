@@ -40,7 +40,7 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
     <Link href={`/dashboard/equipment/${id}`}>
       <Card shadow='sm' isPressable>
         <CardBody
-          className={`overflow-visible p-0 ${isDisabled ? 'bg-red-500' : 'bg-green-500'} ${validityDate ? 'bg-orange-500' : 'bg-green-500'}`}
+          className={`overflow-visible p-0 ${isDisabled ? 'bg-red-500' : 'bg-green-500'} ${validityDate ? 'bg-orange-500' : ''}`}
           style={{ height: '100%' }}
         >
           <Image
@@ -54,7 +54,7 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
           />
         </CardBody>
         <CardFooter
-          className={`flex items-center justify-between text-small ${isDisabled ? 'bg-red-500' : 'bg-green-500'} ${validityDate ? 'bg-orange-500' : 'bg-green-500'}`}
+          className={`flex items-center justify-between text-small ${isDisabled ? 'bg-red-500' : 'bg-green-500'} ${validityDate ? 'bg-orange-500' : ''}`}
           style={{ height: 'fit-content' }}
         >
           <div>
