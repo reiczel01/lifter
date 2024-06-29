@@ -11,7 +11,7 @@ export default function Barcode(props: BarcodeProps) {
   const { inputRef } = useBarcode({
     value: props.value,
     options: {
-      background: '#ffffff',
+      background: '#00000000',
       displayValue: props.displayValue || false,
       height: props.height || 30,
       format: 'CODE128',

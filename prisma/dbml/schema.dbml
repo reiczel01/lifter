@@ -1,0 +1,120 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table User {
+  id String [pk]
+  name String [not null]
+  surname String [not null]
+  email String [unique, not null]
+  password String [not null]
+  licenceNumber String
+  peselNumber Int
+  permissionsValidityDate DateTime
+  desabled Boolean [not null, default: false]
+  role String [default: 'operator']
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  permissions Permission [not null]
+  userLog UserLog [not null]
+  fault Fault [not null]
+  tasks Tasks [not null]
+}
+
+Table Tasks {
+  id Int [pk, increment]
+  title String [not null]
+  description String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  updatedBy String [not null]
+  isFinished Boolean [not null, default: false]
+  isStarted Boolean [not null, default: false]
+  user User [not null]
+  userId String [not null]
+}
+
+Table Equipment {
+  id Int [pk, increment]
+  registrationNumber String [unique, not null]
+  serialNumber String [unique, not null]
+  liftingCapacityKg Int [not null]
+  model String [not null]
+  constructionYear Int [not null]
+  validityDate DateTime [not null]
+  protocolFilePath String [not null]
+  decisionFilePath String [not null]
+  manualFilePath String [not null]
+  deviceSchematics String [not null]
+  image String [not null]
+  type Type [not null]
+  permissions Permission [not null]
+  fault Fault [not null]
+  userLog UserLog [not null]
+}
+
+Table Type {
+  id Int [pk, increment]
+  label String [not null]
+  value String [not null]
+  description String [not null]
+  equipment Equipment [not null]
+}
+
+Table Fault {
+  id Int [pk, increment]
+  present Boolean [not null]
+  title String [not null]
+  description String
+  solution String
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  user User [not null]
+  userId String [not null]
+  equipment Equipment [not null]
+}
+
+Table Permission {
+  id Int [pk, increment]
+  name String [not null]
+  equipment Equipment [not null]
+  user User [not null]
+}
+
+Table UserLog {
+  id Int [pk, increment]
+  comment String [not null, default: 'Brak uwag']
+  createdAt DateTime [default: `now()`, not null]
+  user User [not null]
+  userId String [not null]
+  equipment Equipment [not null]
+  equipmentId Int [not null]
+}
+
+Table PermissionToUser {
+  permissionsId Int [ref: > Permission.id]
+  userId String [ref: > User.id]
+}
+
+Table EquipmentToType {
+  typeId Int [ref: > Type.id]
+  equipmentId Int [ref: > Equipment.id]
+}
+
+Table EquipmentToPermission {
+  permissionsId Int [ref: > Permission.id]
+  equipmentId Int [ref: > Equipment.id]
+}
+
+Table EquipmentToFault {
+  faultId Int [ref: > Fault.id]
+  equipmentId Int [ref: > Equipment.id]
+}
+
+Ref: Tasks.userId > User.id [delete: Cascade]
+
+Ref: Fault.userId > User.id
+
+Ref: UserLog.userId > User.id
+
+Ref: UserLog.equipmentId > Equipment.id

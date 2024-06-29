@@ -25,21 +25,20 @@ export default function RegisterUserUsage({
   const [formState, action] = useFormState(registerFault, { message: '' });
 
   const router = useRouter();
-  useEffect(() => {
-    if (formState.message === 'Zarejestrowano użycie sprzętu') {
-      const timer = setTimeout(() => {
-        router.replace(`/dashboard`);
-      }, 4000);
 
-      // Clean up the timer on unmount or if formState.message changes
-      return () => clearTimeout(timer);
+  const reloadPage = () => {
+    router.refresh();
+  };
+  useEffect(() => {
+    if (formState.message === 'Zarejestrowano usterkę') {
+      reloadPage();
     }
   }, [formState.message, router]);
 
   console.log('equipmentId', equipmentId);
   return (
     <ModalSizable
-      title={'Rejestrowanie usterkę'}
+      title={'Zarejestruj usterkę'}
       size={'md'}
       className={'float-end w-1/2'}
     >
@@ -60,7 +59,7 @@ export default function RegisterUserUsage({
           <Input className='hidden' name='equipmentId' value={equipmentId} />
           <Input className='hidden' name='userId' value={userId} />
           <div>{formState.message} </div>
-          <Button type='submit'>Zarejestruj urzycie</Button>
+          <Button type='submit'>Zarejestruj usterkę</Button>
         </div>
       </form>
     </ModalSizable>

@@ -1,4 +1,5 @@
 'use client';
+import React, { useState } from 'react';
 import {
   Button,
   Card,
@@ -10,18 +11,49 @@ import {
   Divider,
   Image,
   Input,
-  Link,
   Tooltip,
+  Link,
 } from '@nextui-org/react';
-import { ArrowRightIcon } from '@nextui-org/shared-icons';
-import React, { useState } from 'react';
-import createEquipment from '@/app/dashboard/registerEquipment/submit';
+import QRCode from 'qrcode.react';
 import { useFormState } from 'react-dom';
-export default function RegisterEquipmentPage() {
-  const [formState, action] = useFormState(createEquipment, { message: '' });
-  const [selectedPermissions, setSelectedPermissions] = useState([]);
+import { ArrowRightIcon } from '@nextui-org/shared-icons';
+import editEquipment from '@/app/dashboard/editEquipment/[id]/submit';
 
-  const handlePermissionsChange = (selected) => {
+interface EquipmentEditCardProps {
+  id: string;
+  registrationNumber: string;
+  serialNumber: string;
+  liftingCapacityKg: string;
+  model: string;
+  constructionYear: string;
+  validityDate: string;
+  protocolFilePath: string;
+  decisionFilePath: string;
+  manualFilePath: string;
+  deviceSchematics: string;
+  image: string;
+  perms: string[];
+}
+
+const EquipmentEditCard: React.FC<EquipmentEditCardProps> = ({
+  id,
+  registrationNumber,
+  serialNumber,
+  liftingCapacityKg,
+  model,
+  constructionYear,
+  validityDate,
+  protocolFilePath,
+  decisionFilePath,
+  manualFilePath,
+  deviceSchematics,
+  image,
+  perms,
+}) => {
+  const [formState, action] = useFormState(editEquipment, { message: '' });
+  const [selectedPermissions, setSelectedPermissions] = useState(perms);
+
+  const handlePermissionsChange = (selected: any) => {
     setSelectedPermissions(selected);
   };
 
@@ -32,23 +64,25 @@ export default function RegisterEquipmentPage() {
           <CardHeader className='flex w-full flex-col items-center gap-4 md:flex-row'>
             <Image
               alt='nextui logo'
-              height='max-h-32'
+              height='max-h-20'
               radius='sm'
               src='../../../../Lifter-logo-only.png'
               width='w-auto'
             />
             <div className='flex flex-col pr-6'>
-              <p className='text-xl'>Rejestracja sprzętu</p>
+              <p className='text-xl'>Edycja sprzętu</p>
               <p className='text-lg text-default-500'>LIFTER</p>
             </div>
           </CardHeader>
           <Divider />
           <CardBody className='flex w-full flex-col justify-center px-10 md:flex-row md:items-center'>
             <div className='items-center md:mr-8'>
+              <Input name='id' className='hidden' defaultValue={id} />
               <Input
                 isRequired
                 name='image'
                 type='string'
+                defaultValue={image}
                 label='Grafika'
                 className='mt-4'
               />
@@ -56,6 +90,7 @@ export default function RegisterEquipmentPage() {
                 isRequired
                 name='registrationNumber'
                 type='number'
+                defaultValue={registrationNumber}
                 label='Numer ewidencji'
                 className='mt-4'
               />
@@ -63,6 +98,7 @@ export default function RegisterEquipmentPage() {
                 isRequired
                 name='serialNumber'
                 type='text'
+                defaultValue={serialNumber}
                 label='Numer seryjny'
                 className='mt-4'
               />
@@ -70,6 +106,7 @@ export default function RegisterEquipmentPage() {
                 isRequired
                 name='liftingCapacityKg'
                 type='number'
+                defaultValue={liftingCapacityKg}
                 label='Udzwig w kg'
                 className='mt-4'
               />
@@ -77,6 +114,7 @@ export default function RegisterEquipmentPage() {
                 isRequired
                 name='model'
                 type='text'
+                defaultValue={model}
                 label='Model'
                 className='mt-4'
               />
@@ -84,7 +122,8 @@ export default function RegisterEquipmentPage() {
                 isRequired
                 name='constructionYear'
                 type='number'
-                label='Rok budowy'
+                defaultValue={constructionYear}
+                label='Rok produkcji'
                 className='mt-4'
               />
             </div>
@@ -93,7 +132,8 @@ export default function RegisterEquipmentPage() {
                 isRequired
                 name='validityDate'
                 type='date'
-                label='Data warzności decyzji'
+                defaultValue={validityDate}
+                label='Data ważności decyzji'
                 className='mt-4'
               />
               <div className='mt-4'>
@@ -105,6 +145,7 @@ export default function RegisterEquipmentPage() {
                   name='protocolFilePath'
                   type='text'
                   className='mt-4'
+                  defaultValue={protocolFilePath}
                 />
               </div>
               <div className='mt-4'>
@@ -116,6 +157,7 @@ export default function RegisterEquipmentPage() {
                   name='decisionFilePath'
                   type='text'
                   className='mt-4'
+                  defaultValue={decisionFilePath}
                 />
               </div>
               <div className='mt-4'>
@@ -127,6 +169,7 @@ export default function RegisterEquipmentPage() {
                   name='manualFilePath'
                   type='text'
                   className='mt-4'
+                  defaultValue={manualFilePath}
                 />
               </div>
               <div className='mt-4'>
@@ -138,6 +181,7 @@ export default function RegisterEquipmentPage() {
                   name='deviceSchematics'
                   type='text'
                   className='mt-4'
+                  defaultValue={deviceSchematics}
                 />
               </div>
             </div>
@@ -175,11 +219,11 @@ export default function RegisterEquipmentPage() {
                   label='Uprawnienia:'
                   name='permissions'
                 >
-                  <Checkbox value={1}>I WJO</Checkbox>
-                  <Checkbox value={2}>II WJO</Checkbox>
-                  <Checkbox value={3}>III WJO</Checkbox>
-                  <Checkbox value={4}>I S</Checkbox>
-                  <Checkbox value={5}>II S</Checkbox>
+                  <Checkbox value={'1'}>I WJO</Checkbox>
+                  <Checkbox value={'2'}>II WJO</Checkbox>
+                  <Checkbox value={'3'}>III WJO</Checkbox>
+                  <Checkbox value={'4'}>I S</Checkbox>
+                  <Checkbox value={'5'}>II S</Checkbox>
                 </CheckboxGroup>
               </div>
             </Tooltip>
@@ -188,7 +232,7 @@ export default function RegisterEquipmentPage() {
           <Divider />
           <CardFooter className='w-full justify-between'>
             <Link
-              isExternal
+              isExternal={true}
               showAnchorIcon
               href='https://www.udt.gov.pl/rejestracja-urzadzenia'
             >
@@ -201,7 +245,7 @@ export default function RegisterEquipmentPage() {
               size='md'
               className=' text-sm md:w-1/5'
             >
-              Zarejestruj
+              Zatwierdź zmiany
               <ArrowRightIcon />
             </Button>
           </CardFooter>
@@ -209,4 +253,6 @@ export default function RegisterEquipmentPage() {
       </form>
     </div>
   );
-}
+};
+
+export default EquipmentEditCard;

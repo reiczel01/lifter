@@ -7,7 +7,7 @@ export default function LogOut() {
     <Button
       variant='flat'
       onClick={() => {
-        deleteCookie('user-data');
+        deleteCookie('page.tsx-data');
         signOut();
       }}
     >

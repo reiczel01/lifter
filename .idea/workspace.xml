@@ -4,13 +4,61 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6842891-5e4d-4e8a-bcdb-54b7728620dc" name="Changes" comment="Working adding equipment">
+    <list default="true" id="b6842891-5e4d-4e8a-bcdb-54b7728620dc" name="Changes" comment="Working table, registering usage, started to make fault logic and forms">
+      <change afterPath="$PROJECT_DIR$/app/dashboard/editEquipment/[id]/EquipmentEdit.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/editEquipment/[id]/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/editEquipment/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/editEquipment/[id]/submit.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/editFault/[...editFault]/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/editTasks/[...editTasks]/handler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/editTasks/[...editTasks]/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/editTasks/[...editTasks]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/equipment/[id]/EditButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/registerEquipment/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/registerTask/[id]/handler.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/registerTask/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/searchEquipment/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/searchTasks/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/tasks/CreateButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/tasks/handler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/user/Usage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/user/hendler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/user/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/userAdministration/handler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/userAdministration/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/userEdit/[id]/handler.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/dashboard/userEdit/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/TaskCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/TaskCardEdit.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/loginChecker/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prisma/dbml/schema.dbml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/api/auth/cookie/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/cookie/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dashboard/editFault/[...editFault]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/editFault/[...editFault]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dashboard/equipment/[id]/RegisterFault.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/equipment/[id]/RegisterFault.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dashboard/equipment/[id]/RegisterUserUsage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/equipment/[id]/RegisterUserUsage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dashboard/equipment/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/equipment/[id]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/EquipmentCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/EquipmentCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dashboard/registerEquipment/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/registerEquipment/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dashboard/registerEquipment/submit.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/registerEquipment/submit.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dashboard/tasks/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/dashboard/tasks/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/providers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/EquipmentRegistration.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/FaultCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/FaultCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/LogOut.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LogOut.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/TabelOfUsage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/TabelOfUsage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/barcode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/barcode.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/DB.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/DB.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/migrations/20240522101823_init/migration.sql" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/migrations/20240617062833_init/migration.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +88,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+    <option name="showPreview" value="true" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -59,7 +111,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mateuszreczulski/Documents/Programowanie/lifter/app/dashboard/tasks&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mateuszreczulski/Documents/Programowanie/lifter/app/dashboard/searchTasks&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -70,22 +122,23 @@
     &quot;npm.Next.js.executor&quot;: &quot;Run&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/mateuszreczulski/Documents/Programowanie/lifter/node_modules/prettier&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Mateusz\\Desktop\\lifter\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/mateuszreczulski/Documents/Programowanie/lifter/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/dashboard/searchTasks" />
       <recent name="$PROJECT_DIR$/app/dashboard/tasks" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/dashboard/editFault/[...editFault]" />
+      <recent name="$PROJECT_DIR$/app/dashboard/userEdit/[...userEdit]" />
+      <recent name="$PROJECT_DIR$/app/dashboard/editTasks/[...editTasks]" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/app/dashboard/tasks" />
-      <recent name="C:\Users\Mateusz\Desktop\lifter\public" />
-      <recent name="$PROJECT_DIR$/app/dashboard" />
+      <recent name="$PROJECT_DIR$/app/dashboard/editEquipment/[id]" />
+      <recent name="$PROJECT_DIR$/app/dashboard/editEquipment/[equipmentData]" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js">
@@ -113,13 +166,6 @@
       <item itemvalue="npm.Next.js" />
     </list>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -141,6 +187,14 @@
       <workItem from="1713776182694" duration="5253000" />
       <workItem from="1714130818154" duration="2371000" />
       <workItem from="1716372737812" duration="335000" />
+      <workItem from="1716704942103" duration="80000" />
+      <workItem from="1716705029655" duration="43065000" />
+      <workItem from="1717609708739" duration="4413000" />
+      <workItem from="1717916695990" duration="13596000" />
+      <workItem from="1718362922952" duration="891000" />
+      <workItem from="1718371513574" duration="677000" />
+      <workItem from="1718604614694" duration="7956000" />
+      <workItem from="1718618730304" duration="20081000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -203,6 +257,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

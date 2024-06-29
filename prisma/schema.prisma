@@ -13,6 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
 model User {
   id                      String       @id @default(cuid())
   name                    String
@@ -22,12 +26,27 @@ model User {
   licenceNumber           String?
   peselNumber             Int?
   permissionsValidityDate DateTime?
-  role                    String?
+  desabled                Boolean      @default(false)
+  role                    String?      @default("operator")
   createdAt               DateTime     @default(now())
   updatedAt               DateTime     @updatedAt
   permissions             Permission[]
   userLog                 UserLog[]
   fault                   Fault[]
+  tasks                   Tasks[]
+}
+
+model Tasks {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.LongText
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  updatedBy   String
+  isFinished  Boolean  @default(false)
+  isStarted   Boolean  @default(false)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
 }
 
 model Equipment {
@@ -53,7 +72,7 @@ model Type {
   id          Int         @id @default(autoincrement())
   label       String
   value       String
-  description String
+  description String      @db.LongText
   equipment   Equipment[]
 }
 
@@ -61,7 +80,7 @@ model Fault {
   id          Int         @id @default(autoincrement())
   present     Boolean
   title       String
-  description String?
+  description String?     @db.LongText
   solution    String?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt

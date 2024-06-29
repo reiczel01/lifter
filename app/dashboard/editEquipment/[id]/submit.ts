@@ -2,10 +2,11 @@
 import { db } from '@/db';
 import { redirect } from 'next/navigation';
 
-export default async function createEquipment(
+export default async function editEquipment(
   formState: { message: string },
   formData: FormData,
 ): Promise<{ message: string }> {
+  const id = formData.get('id') as string;
   const registrationNumber = formData.get('registrationNumber') as string;
   if (!registrationNumber || registrationNumber.length < 4) {
     return { message: 'Numer ewidencji musi mieć co najmniej 4 znaki' };
@@ -29,6 +30,7 @@ export default async function createEquipment(
   }
   const validityDate = new Date(formData.get('validityDate') as string);
   if (validityDate < new Date()) {
+    console.log(validityDate);
     return { message: 'Data ważności musi być większa od obecnej daty' };
   }
   const model = formData.get('model') as string;
@@ -71,7 +73,10 @@ export default async function createEquipment(
     console.log(permissions);
 
     // Utwórz nowy sprzęt w bazie danych z przypisanymi uprawnieniami
-    const equipment = await db.equipment.create({
+    const equipment = await db.equipment.update({
+      where: {
+        id: Number(id),
+      },
       data: {
         registrationNumber,
         serialNumber,
@@ -95,7 +100,7 @@ export default async function createEquipment(
     console.error('Wystąpił błąd podczas tworzenia sprzętu:', error);
     return { message: 'Wystąpił błąd podczas tworzenia sprzętu' };
   }
-  redirect('/dashboard');
+  redirect(`/dashboard/equipment/${id}`);
 }
 
 function isURL(str: string) {

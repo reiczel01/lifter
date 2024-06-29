@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { db } from '@/db';
-import { Card, CardHeader, Divider } from '@nextui-org/react';
+import { Button, Card, CardHeader, Divider } from '@nextui-org/react';
 import Barcode from '@/components/barcode';
 import { format } from 'date-fns'; // Usunięto nieużywany import
 import { pl } from 'date-fns/locale';
@@ -13,6 +13,8 @@ import RegisterFault from '@/app/dashboard/equipment/[id]/RegisterFault';
 import { getSession } from '@/app/api/auth/session/route';
 import { cookies } from 'next/headers';
 import EditFault from '@/components/EditFault';
+import Link from 'next/link';
+import EditButton from '@/app/dashboard/equipment/[id]/EditButton';
 
 export default async function EquipmentPage({
   params,
@@ -109,8 +111,19 @@ export default async function EquipmentPage({
             </Card>
           </div>
           <div className='m-2'>
-            <p className='font-bold uppercase'>model:</p>
-            <a className='text-xl'> {equipment.model} </a>
+            <div className='flex flex-row items-center justify-between'>
+              <div>
+                <p className='font-bold uppercase'>model:</p>
+                <a className='text-xl'> {equipment.model} </a>
+              </div>
+              {data.role === 'admin' || data.role === 'technician' ? (
+                <div className='m-3 flex gap-2 rounded-2xl bg-gray-200 p-3'>
+                  <EditButton id={params.id} />
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
           <Divider className='my-4' />
           <div className='m-2'>
@@ -190,7 +203,7 @@ export default async function EquipmentPage({
         <div className='flex-1 rounded-lg bg-white p-4 shadow lg:w-1/2 lg:flex-none'>
           <div className='flex w-full flex-row justify-between'>
             <h1 className='mb-3 mt-1 text-xl font-bold'>
-              Historia urzytkowania:
+              Historia użytkowania:
             </h1>
             {faulty || equipment.validityDate < currentDate ? (
               <></>

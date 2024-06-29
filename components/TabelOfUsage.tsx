@@ -45,7 +45,7 @@ export default function TabelOfUsage(userLogs: TabelOfUsageProps) {
   return (
     <Table aria-label='Example static collection table'>
       <TableHeader>
-        <TableColumn>URZYTKOWNIK</TableColumn>
+        <TableColumn>UŻYTKOWNIK</TableColumn>
         <TableColumn>UWAGI</TableColumn>
         <TableColumn>CZAS POBRANIA</TableColumn>
       </TableHeader>

@@ -15,7 +15,8 @@ import { ArrowRightIcon } from '@nextui-org/shared-icons';
 import React, { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import { editFault } from '@/app/dashboard/editFault/[...editFault]/handler';
-import { useParams, useRouter } from 'next/navigation';
+import { redirect, useParams, useRouter } from 'next/navigation';
+import { technicianOrAdminChecker } from '@/loginChecker';
 
 export default function EditFault() {
   const params = useParams();
@@ -39,16 +40,12 @@ export default function EditFault() {
   console.log(present);
 
   const router = useRouter();
+
   useEffect(() => {
     if (formState.message === 'Uaktualniono usterkę') {
-      const timer = setTimeout(() => {
-        router.push(`/dashboard/equipment/${equipmentId}`);
-      }, 4000);
-
-      // Clean up the timer on unmount or if formState.message changes
-      return () => clearTimeout(timer);
+      router.replace(`/dashboard/equipment/${equipmentId}`);
     }
-  }, [formState.message, router]);
+  }, [formState.message, router, equipmentId]);
   return (
     <div className='flex w-full flex-col items-center '>
       <form className='w-1/2' action={action}>
@@ -79,11 +76,11 @@ export default function EditFault() {
                 className='mt-4 w-full'
               />
               <Textarea
-                label='Opis rozwiazania'
+                label='Opis rozwiązania'
                 name='solution'
                 defaultValue={solutionValue}
                 type='string'
-                placeholder='Opisz rozwiazanie...'
+                placeholder='Opisz rozwiązanie...'
                 className='mt-4 w-full'
               />
               <Input name='userId' defaultValue={userId} className={'hidden'} />

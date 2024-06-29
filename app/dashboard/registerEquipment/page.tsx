@@ -1,6 +1,4 @@
 'use client';
-import { useFormState } from 'react-dom';
-import createUser from '@/app/register/submit';
 import {
   Button,
   Card,
@@ -17,20 +15,18 @@ import {
 } from '@nextui-org/react';
 import { ArrowRightIcon } from '@nextui-org/shared-icons';
 import React, { useState } from 'react';
-import { redirect } from 'next/navigation';
-
-export default function Register() {
-  const [formState, action] = useFormState(createUser, { message: '' });
+import createEquipment from '@/app/dashboard/registerEquipment/submit';
+import { useFormState } from 'react-dom';
+export default function RegisterEquipmentPage() {
+  const [formState, action] = useFormState(createEquipment, { message: '' });
   const [selectedPermissions, setSelectedPermissions] = useState([]);
 
   const handlePermissionsChange = (selected: any) => {
     setSelectedPermissions(selected);
   };
-  if (formState.message === 'Użytkownik utworzony') {
-    redirect('/');
-  }
+
   return (
-    <div className='flex h-screen flex-col items-center justify-center'>
+    <div className='flex flex-col items-center'>
       <form action={action}>
         <Card className='mt-4 max-w-3xl items-center'>
           <CardHeader className='flex w-full flex-col items-center gap-4 md:flex-row'>
@@ -38,11 +34,11 @@ export default function Register() {
               alt='nextui logo'
               height='max-h-32'
               radius='sm'
-              src='/Lifter-logo-only.png'
+              src='../../../../Lifter-logo-only.png'
               width='w-auto'
             />
             <div className='flex flex-col pr-6'>
-              <p className='text-xl'>Rejestracja</p>
+              <p className='text-xl'>Rejestracja sprzętu</p>
               <p className='text-lg text-default-500'>LIFTER</p>
             </div>
           </CardHeader>
@@ -51,62 +47,99 @@ export default function Register() {
             <div className='items-center md:mr-8'>
               <Input
                 isRequired
+                name='image'
+                type='string'
+                label='Grafika'
+                className='mt-4'
+              />
+              <Input
+                isRequired
+                name='registrationNumber'
+                type='number'
+                label='Numer ewidencji'
+                className='mt-4'
+              />
+              <Input
+                isRequired
+                name='serialNumber'
                 type='text'
-                name='name'
-                label='Imię'
+                label='Numer seryjny'
                 className='mt-4'
               />
               <Input
                 isRequired
+                name='liftingCapacityKg'
+                type='number'
+                label='Udzwig w kg'
+                className='mt-4'
+              />
+              <Input
+                isRequired
+                name='model'
                 type='text'
-                name='surname'
-                label='Nazwisko'
+                label='Model'
                 className='mt-4'
               />
               <Input
                 isRequired
-                type='email'
-                name='email'
-                label='Email'
-                className='mt-4'
-              />
-              <Input
-                isRequired
-                name='password'
-                type='password'
-                label='Hasło'
-                className='mt-4'
-              />
-              <Input
-                isRequired
-                name='passwordRetype'
-                type='password'
-                label='Powtórz hasło'
+                name='constructionYear'
+                type='number'
+                label='Rok produkcji'
                 className='mt-4'
               />
             </div>
             <div className='items-center md:mr-8'>
               <Input
                 isRequired
-                type='text'
-                name='licenceNumber'
-                label='Numer uprawnień'
-                className='mt-4'
-              />
-              <Input
-                isRequired
-                type='number'
-                name='peselNumber'
-                label='Numer PESEL'
-                className='mt-4'
-              />
-              <Input
-                isRequired
+                name='validityDate'
                 type='date'
-                name='permissionsValidityDate'
-                label='Data ważności uprawnień'
+                label='Data ważności decyzji'
                 className='mt-4'
               />
+              <div className='mt-4'>
+                <label className='block text-sm font-medium text-gray-700'>
+                  Protokół wykonania czynności dozoru technicznego (url):
+                </label>
+                <Input
+                  isRequired
+                  name='protocolFilePath'
+                  type='text'
+                  className='mt-4'
+                />
+              </div>
+              <div className='mt-4'>
+                <label className='block text-sm font-medium text-gray-700'>
+                  Decyzja (url):
+                </label>
+                <Input
+                  isRequired
+                  name='decisionFilePath'
+                  type='text'
+                  className='mt-4'
+                />
+              </div>
+              <div className='mt-4'>
+                <label className='block text-sm font-medium text-gray-700'>
+                  Instrukcja obsługi (url):
+                </label>
+                <Input
+                  isRequired
+                  name='manualFilePath'
+                  type='text'
+                  className='mt-4'
+                />
+              </div>
+              <div className='mt-4'>
+                <label className='block text-sm font-medium text-gray-700'>
+                  Schematy urządzenia (url):
+                </label>
+                <Input
+                  isRequired
+                  name='deviceSchematics'
+                  type='text'
+                  className='mt-4'
+                />
+              </div>
             </div>
             <Tooltip
               content={
@@ -114,7 +147,7 @@ export default function Register() {
                   <div className='text-small font-bold'>Typy uprawnień:</div>
                   <div className='text-tiny'>
                     I WJO – uprawnia do obsługi wózków jezdniowych, w tym
-                    specjalizowanych
+                    specjalizowanych.
                   </div>
                   <div className='text-tiny'>
                     II WJO – uprawnia do obsługi wózków jezdniowych
@@ -142,11 +175,11 @@ export default function Register() {
                   label='Uprawnienia:'
                   name='permissions'
                 >
-                  <Checkbox value='1'>I WJO</Checkbox>
-                  <Checkbox value='2'>II WJO</Checkbox>
-                  <Checkbox value='3'>III WJO</Checkbox>
-                  <Checkbox value='4'>I S</Checkbox>
-                  <Checkbox value='5'>II S</Checkbox>
+                  <Checkbox value={'1'}>I WJO</Checkbox>
+                  <Checkbox value={'2'}>II WJO</Checkbox>
+                  <Checkbox value={'3'}>III WJO</Checkbox>
+                  <Checkbox value={'4'}>I S</Checkbox>
+                  <Checkbox value={'5'}>II S</Checkbox>
                 </CheckboxGroup>
               </div>
             </Tooltip>
@@ -154,17 +187,21 @@ export default function Register() {
 
           <Divider />
           <CardFooter className='w-full justify-between'>
-            <Link showAnchorIcon href='/'>
-              Zaloguj się.
+            <Link
+              isExternal
+              showAnchorIcon
+              href='https://www.udt.gov.pl/rejestracja-urzadzenia'
+            >
+              Wymagania UDT
             </Link>
             <div>{formState.message}</div>
             <Button
-              type='submit'
               color='primary'
+              type='submit'
               size='md'
               className=' text-sm md:w-1/5'
             >
-              Zarejestruj się
+              Zarejestruj
               <ArrowRightIcon />
             </Button>
           </CardFooter>

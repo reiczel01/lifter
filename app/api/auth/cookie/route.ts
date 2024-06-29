@@ -16,7 +16,7 @@ export async function getCookieUserData(): Promise<any> {
     const cookieStore = cookies();
     const cookie = cookieStore.get('user-data');
     if (!cookie) {
-      throw new Error('No user data cookie found');
+      throw new Error('No page.tsx data cookie found');
     }
     const data = JSON.parse(cookie.value);
     console.log(data);

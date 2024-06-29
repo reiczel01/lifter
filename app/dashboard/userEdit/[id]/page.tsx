@@ -16,19 +16,43 @@ import {
   Tooltip,
 } from '@nextui-org/react';
 import { ArrowRightIcon } from '@nextui-org/shared-icons';
-import React, { useState } from 'react';
-import { redirect } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { fetchUser } from '@/app/dashboard/userEdit/[id]/handler';
 
-export default function Register() {
+export default function UserEdit({ params }) {
+  const { id } = params; // Pobranie id z params
   const [formState, action] = useFormState(createUser, { message: '' });
   const [selectedPermissions, setSelectedPermissions] = useState([]);
+  const [user, setUser] = useState(null); // Dodane do przechowywania danych użytkownika
 
-  const handlePermissionsChange = (selected: any) => {
+  const handlePermissionsChange = (selected) => {
     setSelectedPermissions(selected);
   };
-  if (formState.message === 'Użytkownik utworzony') {
-    redirect('/');
-  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (id) {
+        // Sprawdź, czy id jest obecne
+        try {
+          const userData = await fetchUser(id);
+          setUser(userData); // Przechowuj dane użytkownika w stanie
+          console.log(userData);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      } else {
+        console.error('User ID is not provided');
+      }
+    };
+
+    fetchData();
+  }, [id]);
+  console.log(user);
+  // if (formState.message === 'Użytkownik utworzony') {
+  //     redirect('/');
+  // }
+
   return (
     <div className='flex h-screen flex-col items-center justify-center'>
       <form action={action}>
@@ -42,7 +66,7 @@ export default function Register() {
               width='w-auto'
             />
             <div className='flex flex-col pr-6'>
-              <p className='text-xl'>Rejestracja</p>
+              <p className='text-xl'>Edycja użytkownika</p>
               <p className='text-lg text-default-500'>LIFTER</p>
             </div>
           </CardHeader>
@@ -55,6 +79,7 @@ export default function Register() {
                 name='name'
                 label='Imię'
                 className='mt-4'
+                defaultValue={user ? user.name : ''} // Ustaw domyślną wartość
               />
               <Input
                 isRequired
@@ -62,6 +87,7 @@ export default function Register() {
                 name='surname'
                 label='Nazwisko'
                 className='mt-4'
+                defaultValue={user ? user.surname : ''} // Ustaw domyślną wartość
               />
               <Input
                 isRequired
@@ -69,6 +95,7 @@ export default function Register() {
                 name='email'
                 label='Email'
                 className='mt-4'
+                defaultValue={user ? user.email : ''} // Ustaw domyślną wartość
               />
               <Input
                 isRequired
@@ -92,6 +119,7 @@ export default function Register() {
                 name='licenceNumber'
                 label='Numer uprawnień'
                 className='mt-4'
+                defaultValue={user ? user.licenceNumber : ''} // Ustaw domyślną wartość
               />
               <Input
                 isRequired
@@ -99,6 +127,7 @@ export default function Register() {
                 name='peselNumber'
                 label='Numer PESEL'
                 className='mt-4'
+                defaultValue={user ? user.peselNumber : ''} // Ustaw domyślną wartość
               />
               <Input
                 isRequired
@@ -106,6 +135,7 @@ export default function Register() {
                 name='permissionsValidityDate'
                 label='Data ważności uprawnień'
                 className='mt-4'
+                defaultValue={user ? user.permissionsValidityDate : ''} // Ustaw domyślną wartość
               />
             </div>
             <Tooltip
@@ -114,7 +144,7 @@ export default function Register() {
                   <div className='text-small font-bold'>Typy uprawnień:</div>
                   <div className='text-tiny'>
                     I WJO – uprawnia do obsługi wózków jezdniowych, w tym
-                    specjalizowanych
+                    specjalizowanych.
                   </div>
                   <div className='text-tiny'>
                     II WJO – uprawnia do obsługi wózków jezdniowych
@@ -154,9 +184,6 @@ export default function Register() {
 
           <Divider />
           <CardFooter className='w-full justify-between'>
-            <Link showAnchorIcon href='/'>
-              Zaloguj się.
-            </Link>
             <div>{formState.message}</div>
             <Button
               type='submit'
@@ -164,7 +191,7 @@ export default function Register() {
               size='md'
               className=' text-sm md:w-1/5'
             >
-              Zarejestruj się
+              Zapisz zmiany
               <ArrowRightIcon />
             </Button>
           </CardFooter>

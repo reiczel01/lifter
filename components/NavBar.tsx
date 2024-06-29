@@ -26,7 +26,12 @@ export default function NavBar(props: NavBarProps) {
   const isActive = (href: string) => router === href;
 
   return (
-    <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      maxWidth={'xl'}
+      isBordered
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent className='sm:hidden' justify='start'>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -66,8 +71,10 @@ export default function NavBar(props: NavBarProps) {
         <NavbarItem>
           <Link
             color='foreground'
-            className={isActive('/tasks') ? 'font-bold text-blue-700' : ''}
-            href='/tasks'
+            className={
+              isActive('/dashboard/tasks') ? 'font-bold text-blue-700' : ''
+            }
+            href='/dashboard/tasks'
           >
             Zadania
           </Link>
@@ -75,15 +82,32 @@ export default function NavBar(props: NavBarProps) {
         <NavbarItem>
           <Link
             color='foreground'
-            className={isActive('/user') ? 'font-bold text-blue-700' : ''}
-            href='/user'
+            className={
+              isActive('/dashboard/user') ? 'font-bold text-blue-700' : ''
+            }
+            href='/dashboard/user'
           >
             Profil operatora
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          {props.role === 'admin' ? (
+            <Link
+              color='foreground'
+              className={
+                isActive('/dashboard/userAdministration')
+                  ? 'font-bold text-blue-700'
+                  : ''
+              }
+              href='/dashboard/userAdministration'
+            >
+              Zarządzanie użytkownikami
+            </Link>
+          ) : null}
+        </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent justify='end'>
+      <NavbarContent className='hidden justify-end md:flex'>
         <NavbarItem>
           {props.role === 'admin' ? (
             <Button
@@ -91,8 +115,9 @@ export default function NavBar(props: NavBarProps) {
               color='warning'
               href='/dashboard/registerEquipment'
               variant='flat'
+              className='normal-case'
             >
-              Rejestracja wózka
+              Rejestracja sprzętu
             </Button>
           ) : null}
         </NavbarItem>
@@ -112,21 +137,55 @@ export default function NavBar(props: NavBarProps) {
             Tablica
           </Link>
           <Link
-            className={`w-full ${isActive('/tasks') ? 'text-blue-700' : ''}`}
+            className={`w-full ${isActive('/dashboard/tasks') ? 'text-blue-700' : ''}`}
             color={'foreground'}
-            href='/tasks'
+            href='/dashboard/tasks'
             size='lg'
           >
             Zadania
           </Link>
           <Link
-            className={`w-full ${isActive('/tasks') ? 'text-blue-700' : ''}`}
+            className={`w-full ${isActive('/dashboard/page.tsx') ? 'text-blue-700' : ''}`}
             color={'foreground'}
-            href='/user'
+            href='/dashboard/user'
             size='lg'
           >
             Profil operatora
           </Link>
+          {props.role === 'admin' ? (
+            <Link
+              color='foreground'
+              className={`w-full
+                ${
+                  isActive('/dashboard/userAdministration')
+                    ? 'text-lg text-blue-700'
+                    : ''
+                }`}
+              href='/dashboard/userAdministration'
+            >
+              Zarządzanie użytkownikami
+            </Link>
+          ) : null}
+          <NavbarContent className='flex h-full flex-col items-start justify-end gap-3 md:hidden'>
+            <div className='mt-auto'>
+              <NavbarItem>
+                {props.role === 'admin' ? (
+                  <Button
+                    as={Link}
+                    color='warning'
+                    href='/dashboard/registerEquipment'
+                    variant='flat'
+                    className='normal-case'
+                  >
+                    Rejestracja sprzętu
+                  </Button>
+                ) : null}
+              </NavbarItem>
+              <NavbarItem className='mt-2'>
+                <LogOut />
+              </NavbarItem>
+            </div>
+          </NavbarContent>
         </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>

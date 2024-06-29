@@ -5,6 +5,7 @@ import { db } from '@/db';
 
 import { cookies } from 'next/headers';
 import { json } from 'node:stream/consumers';
+import { redirect } from 'next/navigation';
 interface User {
   id: string;
   name: string;
@@ -18,9 +19,6 @@ interface User {
 }
 
 const handler = NextAuth({
-  session: {
-    strategy: 'jwt',
-  },
   pages: {
     signIn: '/',
   },
@@ -42,6 +40,7 @@ const handler = NextAuth({
             peselNumber: true,
             permissionsValidityDate: true,
             role: true,
+            desabled: true,
             permissions: {
               select: {
                 id: true,
@@ -61,7 +60,7 @@ const handler = NextAuth({
 
           console.log({ passwordCorrect });
           const { password, ...responseWithoutPassword } = response;
-          if (passwordCorrect) {
+          if (passwordCorrect && !response.desabled) {
             cookies().set(
               'user-data',
               JSON.stringify(responseWithoutPassword),
@@ -72,6 +71,9 @@ const handler = NextAuth({
               },
             );
             return response;
+          }
+          if (response.desabled) {
+            redirect(403, '/403');
           }
         }
 

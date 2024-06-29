@@ -40,7 +40,7 @@ export default function FaultCard({
     try {
       await deleteFault(id);
       alert('Usterka została usunięta');
-      // Możesz dodać tutaj dodatkową logikę np. odświeżenie listy usterek
+      router.refresh();
     } catch (error) {
       console.error('Error deleting fault:', error);
       alert('Wystąpił błąd podczas usuwania usterki');
