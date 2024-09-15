@@ -34,3 +34,14 @@ export async function editFault(
     return { message: 'Uaktualniono usterkę' };
   }
 }
+
+export async function getFault(id: number) {
+  return await db.fault.findFirst({
+    where: {
+      id: id,
+    },
+    include: {
+      equipment: true,
+    },
+  });
+}

@@ -21,7 +21,11 @@ export default async function EquipmentPage({
 }: {
   params: { id: string };
 }) {
-  console.log(params.id);
+  const id = parseInt(params.id, 10);
+
+  if (isNaN(id)) {
+    return notFound();
+  }
   const equipment = await db.equipment.findFirst({
     where: {
       id: Number(params.id),
@@ -43,6 +47,10 @@ export default async function EquipmentPage({
       type: true,
     },
   });
+
+  if (!equipment) {
+    return notFound();
+  }
 
   const session = await getSession();
   const data = JSON.parse(

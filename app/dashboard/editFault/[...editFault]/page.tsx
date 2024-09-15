@@ -14,40 +14,45 @@ import {
 import { ArrowRightIcon } from '@nextui-org/shared-icons';
 import React, { useEffect } from 'react';
 import { useFormState } from 'react-dom';
-import { editFault } from '@/app/dashboard/editFault/[...editFault]/handler';
+import {
+  editFault,
+  getFault,
+} from '@/app/dashboard/editFault/[...editFault]/handler';
 import { redirect, useParams, useRouter } from 'next/navigation';
-import { technicianOrAdminChecker } from '@/loginChecker';
 
 export default function EditFault() {
   const params = useParams();
   const editFaultParams = Array.isArray(params.editFault)
     ? params.editFault
     : [];
-  const decodedParams = editFaultParams.map((param) =>
-    decodeURIComponent(param),
-  );
 
-  const [id, userId, description, solution, title, present, equipmentId] =
-    decodedParams;
-  const [formState, action] = useFormState(editFault, { message: '' });
+  // Map and decode parameters in the expected order with default values
+  const [
+    id = '',
+    userId = '',
+    description = '',
+    solution = '',
+    title = '',
+    present = '',
+    equipmentId = '',
+  ] = editFaultParams.map((param) => decodeURIComponent(param || ''));
 
+  // Ensure that present is correctly interpreted as a boolean
   const [isPresent, setIsPresent] = React.useState(present === 'true');
 
-  let solutionValue = solution;
-  if (solution === 'null') {
-    solutionValue = '';
-  }
-  console.log(present);
-
+  const [formState, action] = useFormState(editFault, { message: '' });
   const router = useRouter();
+
+  const fault = getFault(parseInt(id, 10));
 
   useEffect(() => {
     if (formState.message === 'Uaktualniono usterkę') {
       router.replace(`/dashboard/equipment/${equipmentId}`);
     }
   }, [formState.message, router, equipmentId]);
+
   return (
-    <div className='flex w-full flex-col items-center '>
+    <div className='flex w-full flex-col items-center'>
       <form className='w-1/2' action={action}>
         <Card className='mt-4 w-full items-center'>
           <CardHeader className='flex w-full flex-col items-center gap-4 md:flex-row'>
@@ -57,7 +62,7 @@ export default function EditFault() {
             </div>
           </CardHeader>
           <Divider />
-          <CardBody className='flex w-full flex-col justify-center  px-10 md:w-full md:flex-row md:items-center'>
+          <CardBody className='flex w-full flex-col justify-center px-10 md:w-full md:flex-row md:items-center'>
             <div className='w-full items-center'>
               <Input
                 isRequired
@@ -78,7 +83,7 @@ export default function EditFault() {
               <Textarea
                 label='Opis rozwiązania'
                 name='solution'
-                defaultValue={solutionValue}
+                defaultValue={solution === 'null' ? '' : solution}
                 type='string'
                 placeholder='Opisz rozwiązanie...'
                 className='mt-4 w-full'
@@ -111,7 +116,7 @@ export default function EditFault() {
               color='primary'
               type='submit'
               size='md'
-              className=' text-sm md:w-1/5'
+              className='text-sm md:w-1/5'
             >
               Zatwierdź zmiany
               <ArrowRightIcon />

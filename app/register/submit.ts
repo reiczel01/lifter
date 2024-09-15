@@ -43,7 +43,7 @@ export default async function createUser(
     if (!peselNumber || peselNumber.length < 11) {
       return { message: 'Numer PESEL musi mieć co najmniej 11 znaki' };
     }
-    const peselNumberInt = parseInt(peselNumber);
+    const peselNumberInt = peselNumber;
     const permissionsValidityDate = new Date(
       formData.get('permissionsValidityDate') as string,
     );

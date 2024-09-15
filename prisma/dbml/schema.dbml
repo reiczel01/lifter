@@ -9,7 +9,7 @@ Table User {
   email String [unique, not null]
   password String [not null]
   licenceNumber String
-  peselNumber Int
+  peselNumber String
   permissionsValidityDate DateTime
   desabled Boolean [not null, default: false]
   role String [default: 'operator']

@@ -1,43 +1,59 @@
 'use client';
 import { useFormState } from 'react-dom';
-import createUser from '@/app/register/submit';
 import {
   Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  Checkbox,
-  CheckboxGroup,
+  Switch,
   Divider,
   Image,
   Input,
-  Link,
   Tooltip,
+  Select,
+  SelectItem,
+  Checkbox,
+  CheckboxGroup,
 } from '@nextui-org/react';
-import { ArrowRightIcon } from '@nextui-org/shared-icons';
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { fetchUser } from '@/app/dashboard/userEdit/[id]/handler';
+import updateUser, { fetchUser } from '@/app/dashboard/userEdit/[id]/handler';
+import { ArrowRightIcon } from '@nextui-org/shared-icons';
+import { redirect } from 'next/navigation';
 
-export default function UserEdit({ params }) {
-  const { id } = params; // Pobranie id z params
-  const [formState, action] = useFormState(createUser, { message: '' });
-  const [selectedPermissions, setSelectedPermissions] = useState([]);
-  const [user, setUser] = useState(null); // Dodane do przechowywania danych użytkownika
+export default function UserEdit({ params }: { params: { id: string } }) {
+  const { id } = params;
+  const [formState, action] = useFormState(updateUser, { message: '' });
+  const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
+  const [user, setUser] = useState<any>(null);
+  const [role, setRole] = useState<string>('operator'); // Domyślna rola: Operator
+  const [password, setPassword] = useState<string>(''); // Puste hasło domyślnie
+  const [passwordRetype, setPasswordRetype] = useState<string>(''); // Puste hasło domyślnie
+  const [desabled, setDesabled] = useState<boolean>(false); // Stan dezaktywacji
 
-  const handlePermissionsChange = (selected) => {
+  const handlePermissionsChange = (selected: string[]) => {
     setSelectedPermissions(selected);
   };
+
+  if (formState.message === 'Użytkownik zedytowany') {
+    redirect('/dashboard/userAdministration');
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       if (id) {
-        // Sprawdź, czy id jest obecne
         try {
           const userData = await fetchUser(id);
-          setUser(userData); // Przechowuj dane użytkownika w stanie
-          console.log(userData);
+          if (userData) {
+            setUser(userData);
+            setSelectedPermissions(
+              userData.permissions.map((perm: any) => String(perm.id)),
+            );
+            setRole(userData.role || 'operator'); // Jeśli brak roli, ustaw na Operator
+            setDesabled(userData.desabled || false); // Ustawienie stanu dezaktywacji
+          } else {
+            console.error('User not found');
+          }
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
@@ -48,10 +64,15 @@ export default function UserEdit({ params }) {
 
     fetchData();
   }, [id]);
-  console.log(user);
-  // if (formState.message === 'Użytkownik utworzony') {
-  //     redirect('/');
-  // }
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
+  // Formatowanie permissionsValidityDate do formatu YYYY-MM-DD
+  const formattedDate = user.permissionsValidityDate
+    ? new Date(user.permissionsValidityDate).toISOString().split('T')[0]
+    : '';
 
   return (
     <div className='flex h-screen flex-col items-center justify-center'>
@@ -73,13 +94,15 @@ export default function UserEdit({ params }) {
           <Divider />
           <CardBody className='flex w-full flex-col justify-center px-10 md:flex-row md:items-center'>
             <div className='items-center md:mr-8'>
+              <Input type='text' name='id' value={user.id} className='hidden' />
               <Input
                 isRequired
                 type='text'
                 name='name'
                 label='Imię'
                 className='mt-4'
-                defaultValue={user ? user.name : ''} // Ustaw domyślną wartość
+                value={user.name}
+                onChange={(e) => setUser({ ...user, name: e.target.value })}
               />
               <Input
                 isRequired
@@ -87,7 +110,8 @@ export default function UserEdit({ params }) {
                 name='surname'
                 label='Nazwisko'
                 className='mt-4'
-                defaultValue={user ? user.surname : ''} // Ustaw domyślną wartość
+                value={user.surname}
+                onChange={(e) => setUser({ ...user, surname: e.target.value })}
               />
               <Input
                 isRequired
@@ -95,21 +119,26 @@ export default function UserEdit({ params }) {
                 name='email'
                 label='Email'
                 className='mt-4'
-                defaultValue={user ? user.email : ''} // Ustaw domyślną wartość
+                value={user.email}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
               <Input
-                isRequired
                 name='password'
                 type='password'
                 label='Hasło'
                 className='mt-4'
+                placeholder='Zostaw puste, aby nie zmieniać'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Input
-                isRequired
                 name='passwordRetype'
                 type='password'
                 label='Powtórz hasło'
                 className='mt-4'
+                placeholder='Zostaw puste, aby nie zmieniać'
+                value={passwordRetype}
+                onChange={(e) => setPasswordRetype(e.target.value)}
               />
             </div>
             <div className='items-center md:mr-8'>
@@ -119,7 +148,10 @@ export default function UserEdit({ params }) {
                 name='licenceNumber'
                 label='Numer uprawnień'
                 className='mt-4'
-                defaultValue={user ? user.licenceNumber : ''} // Ustaw domyślną wartość
+                value={user.licenceNumber || ''}
+                onChange={(e) =>
+                  setUser({ ...user, licenceNumber: e.target.value })
+                }
               />
               <Input
                 isRequired
@@ -127,7 +159,10 @@ export default function UserEdit({ params }) {
                 name='peselNumber'
                 label='Numer PESEL'
                 className='mt-4'
-                defaultValue={user ? user.peselNumber : ''} // Ustaw domyślną wartość
+                value={user.peselNumber || ''}
+                onChange={(e) =>
+                  setUser({ ...user, peselNumber: e.target.value })
+                }
               />
               <Input
                 isRequired
@@ -135,8 +170,51 @@ export default function UserEdit({ params }) {
                 name='permissionsValidityDate'
                 label='Data ważności uprawnień'
                 className='mt-4'
-                defaultValue={user ? user.permissionsValidityDate : ''} // Ustaw domyślną wartość
+                value={formattedDate} // Ustawienie sformatowanej daty
+                onChange={(e) =>
+                  setUser({
+                    ...user,
+                    permissionsValidityDate: e.target.value,
+                  })
+                }
               />
+              <div className='mt-3 gap-3'>
+                <Select
+                  label='Rola'
+                  value={role}
+                  name={'role'}
+                  placeholder='Wybierz rolę'
+                  selectedKeys={new Set([role])}
+                  onSelectionChange={(keys) => {
+                    const keyArray = Array.from(keys);
+                    const selectedKey =
+                      keyArray.length > 0 ? keyArray[0] : null;
+
+                    if (selectedKey) {
+                      setRole(selectedKey);
+                      setUser({ ...user, role: selectedKey });
+                    } else {
+                      setRole(''); // Lub ustaw domyślną wartość, jeśli żadna nie została wybrana
+                    }
+                  }}
+                >
+                  <SelectItem key='admin'>Administrator</SelectItem>
+                  <SelectItem key='operator'>Operator</SelectItem>
+                  <SelectItem key='technician'>Technik</SelectItem>
+                </Select>
+              </div>
+              <div className='mt-3 gap-3'>
+                <Switch
+                  name='desabled'
+                  value={desabled.toString()}
+                  isSelected={desabled}
+                  onValueChange={(isSelected) => {
+                    setDesabled(isSelected);
+                  }}
+                >
+                  Dezaktywowany?
+                </Switch>
+              </div>
             </div>
             <Tooltip
               content={
@@ -189,7 +267,7 @@ export default function UserEdit({ params }) {
               type='submit'
               color='primary'
               size='md'
-              className=' text-sm md:w-1/5'
+              className='text-sm md:w-1/5'
             >
               Zapisz zmiany
               <ArrowRightIcon />

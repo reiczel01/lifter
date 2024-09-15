@@ -51,14 +51,11 @@ const handler = NextAuth({
             email: credentials?.email,
           },
         });
-
         if (response !== null) {
           const passwordCorrect = await compare(
             credentials?.password || '',
             response.password,
           );
-
-          console.log({ passwordCorrect });
           const { password, ...responseWithoutPassword } = response;
           if (passwordCorrect && !response.desabled) {
             cookies().set(
@@ -82,5 +79,4 @@ const handler = NextAuth({
     }),
   ],
 });
-
 export { handler as GET, handler as POST };

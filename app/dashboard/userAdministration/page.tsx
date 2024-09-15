@@ -132,11 +132,11 @@ export default function UserAdministration() {
                   ) : columnKey === 'edit' ? (
                     <Button onClick={() => handleEdit(item.id)}>Edytuj</Button>
                   ) : columnKey === 'disabled' ? (
-                    item.disabled ? (
+                    item.desabled ? (
                       'tak'
                     ) : (
                       'nie'
-                    )
+                    ) // Notice the change here to 'desabled'
                   ) : (
                     getKeyValue(item, columnKey)
                   )}

@@ -24,7 +24,7 @@ model User {
   email                   String       @unique
   password                String
   licenceNumber           String?
-  peselNumber             Int?
+  peselNumber             String?
   permissionsValidityDate DateTime?
   desabled                Boolean      @default(false)
   role                    String?      @default("operator")

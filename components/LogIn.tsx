@@ -59,7 +59,7 @@ export default function LogIn() {
           <Link showAnchorIcon href='/register'>
             Zarejestruj się.
           </Link>
-          <div>{formState.message}</div>
+          <div className='text-red-700'>{formState.message}</div>
         </CardFooter>
       </Card>
     </form>

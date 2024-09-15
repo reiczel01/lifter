@@ -1,47 +1,31 @@
 'use server';
 
 import { db } from '@/db';
-import { fromDate } from '@internationalized/date';
 import { hash } from 'bcrypt';
-import { redirect } from 'next/navigation';
-type FormState = {
-  message: string;
-};
 
-export default async function createUser(
+export default async function updateUser(
   formState: { message: string },
   formData: FormData,
 ): Promise<{ message: string }> {
   try {
-    console.log(formData);
     const id = formData.get('id') as string;
     const name = formData.get('name') as string;
-    if (!name || name.length < 3) {
-      return { message: 'Imię musi mieć co najmniej 3 znaki' };
-    }
     const surname = formData.get('surname') as string;
-    if (!surname || surname.length < 3) {
-      return { message: 'Nazwisko musi mieć co najmniej 3 znaki' };
-    }
     const email = formData.get('email') as string;
-    if (!email || email.length < 3) {
-      return { message: 'Email musi mieć co najmniej 3 znaki' };
-    }
-    const licenceNumber = formData.get('licenceNumber') as string;
-    if (!licenceNumber || licenceNumber.length < 3) {
-      return { message: 'Numer uprawnień musi mieć co najmniej 3 znaki' };
-    }
-    const peselNumber = formData.get('peselNumber') as string;
-    if (!peselNumber || peselNumber.length < 11) {
-      return { message: 'Numer PESEL musi mieć co najmniej 11 znaki' };
-    }
-    const peselNumberInt = parseInt(peselNumber);
-    const permissionsValidityDate = new Date(
-      formData.get('permissionsValidityDate') as string,
-    );
-    if (permissionsValidityDate < new Date()) {
-      return { message: 'Data ważności uprawnień musi być większa od obecnej' };
-    }
+    const licenceNumber = formData.get('licenceNumber') as string | null;
+    const peselNumber = formData.get('peselNumber') as string | null;
+    const permissionsValidityDate = formData.get('permissionsValidityDate')
+      ? new Date(formData.get('permissionsValidityDate') as string)
+      : null;
+    const password = formData.get('password') as string;
+    const role = formData.get('role') as string;
+    console.log(role);
+    // Pobranie desabled jako stringa i konwersja na boolean
+    const desabledString = formData.get('desabled') as string;
+    const desabled = desabledString === 'true'; // Konwersja na boolean
+
+    console.log(desabled);
+
     const permissionsSelected = formData.getAll(
       'permissions',
     ) as unknown as number[];
@@ -53,22 +37,32 @@ export default async function createUser(
       },
     });
 
+    const userData: any = {
+      name,
+      surname,
+      email,
+      licenceNumber,
+      peselNumber,
+      permissionsValidityDate,
+      role,
+      desabled, // Użyj przekonwertowanej wartości boolean
+      permissions: {
+        set: permissions.map((permission) => ({ id: permission.id })), // Poprawne przypisanie uprawnień
+      },
+    };
+
+    if (password && password.trim().length > 0) {
+      if (password.length < 3) {
+        return { message: 'Hasło musi mieć co najmniej 3 znaki' };
+      }
+      userData.password = await hash(password, 10);
+    }
+
     const user = await db.user.update({
       where: {
         id,
       },
-      data: {
-        name,
-        surname,
-        email,
-
-        licenceNumber,
-        peselNumber: peselNumberInt,
-        permissionsValidityDate,
-        permissions: {
-          connect: permissions.map((permission) => ({ id: permission.id })),
-        },
-      },
+      data: userData,
     });
 
     return { message: 'Użytkownik zedytowany' };
@@ -81,12 +75,11 @@ export default async function createUser(
 export async function fetchUser(id: string) {
   const user = await db.user.findUnique({
     where: {
-      id: id,
+      id,
     },
     include: {
       permissions: true,
     },
   });
-  console.log(user);
   return user;
 }

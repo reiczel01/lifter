@@ -217,10 +217,10 @@ export default function TaskCard({
             </p>
           </div>
           {isFinished && (
-            <div className='flex gap-1'>
+            <div className='mt- flex gap-1'>
               <p className='text-small text-default-400'>Zakończone:</p>
               <p className='text-small font-semibold text-default-400'>
-                {formatDateTime(updatedAt)} {updatedBy}
+                {formatDateTime(updatedAt)}
               </p>
             </div>
           )}

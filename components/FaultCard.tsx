@@ -25,8 +25,8 @@ export default function FaultCard({
 }: Readonly<{
   present: boolean;
   title: string;
-  description?: string | null;
-  solution?: string | null;
+  description: string | '';
+  solution: string | '';
   createdAt: string;
   className?: string;
   updatedAt: string;
@@ -36,6 +36,7 @@ export default function FaultCard({
   equipmentId: number;
 }>) {
   const router = useRouter();
+
   const handleDelete = async () => {
     try {
       await deleteFault(id);
@@ -46,11 +47,17 @@ export default function FaultCard({
       alert('Wystąpił błąd podczas usuwania usterki');
     }
   };
-  const handleEdit = async () => {
+
+  const handleEdit = () => {
+    // Zamiana pustych wartości na "null"
+    const descriptionParam = description ? description : 'null';
+    const solutionParam = solution ? solution : 'null';
+
     router.push(
-      `/dashboard/editFault/${id}/${userId}/${description}/${solution}/${title}/${present}/${equipmentId}`,
+      `/dashboard/editFault/${id}/${userId}/${encodeURIComponent(descriptionParam)}/${encodeURIComponent(solutionParam)}/${encodeURIComponent(title)}/${present}/${equipmentId}`,
     );
   };
+
   return (
     <Card className={className}>
       <CardHeader className='justify-between'>
